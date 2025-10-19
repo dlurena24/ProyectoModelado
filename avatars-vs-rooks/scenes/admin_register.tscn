@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=3 uid="uid://crfpdgt2rij6e"]
+
+[ext_resource type="Script" uid="uid://dglqfttc0uu8f" path="res://scripts/admin_register.gd" id="1_i7res"]
+
+[node name="Register" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_i7res")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 250.0
+offset_bottom = 225.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Crear Cuenta"
+
+[node name="NameInput" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "Nombre de usuario"
+
+[node name="EmailInput" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "Correo electrónico"
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Fecha de Nacimiento"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="DayOption" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MonthOption" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="YearOption" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="UploadPhotoButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Seleccionar Foto de Perfil"
+
+[node name="FileNameLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="FileDialog" type="FileDialog" parent="VBoxContainer"]
+filters = PackedStringArray("*.png", "*.jpg")
+
+[node name="PasswordInput" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Contraseña"
+secret = true
+
+[node name="RegisterButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Registrar"
+
+[node name="ErrorLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ToLoginButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "¿Ya tienes cuenta? Inicia Sesión"

@@ -1,0 +1,41 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Avatars vs Rooks"
+run/main_scene="uid://c0yviw3gumrmc"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+Firebase="*res://addons/godot-firebase/firebase/firebase.tscn"
+GlobalSettings="*res://scripts/GlobalSettings.gd"
+ThemeManager="*res://scripts/ThemeManager.gd"
+BackgroundColorController="*res://scripts/BackgroundColorController.gd"
+SpotifyApi="*res://scripts/spotify_api.gd"
+
+[dotnet]
+
+project/assembly_name="Avatars vs Rooks"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-firebase/plugin.cfg")
+
+[filesystem]
+
+import/fbx2gltf/enabled.web=true
+import/blender/enabled.web=true
+
+[global_group]
+
+ui_text="Label y Panel"
