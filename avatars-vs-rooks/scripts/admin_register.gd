@@ -8,7 +8,7 @@ extends Control
 @onready var year_option = $VBoxContainer/HBoxContainer/YearOption
 
 @onready var upload_button = $VBoxContainer/UploadPhotoButton
-@onready var file_dialog = $FileDialog
+@onready var file_dialog = $VBoxContainer/FileDialog
 @onready var error_label = $VBoxContainer/ErrorLabel
 @onready var register_button = $VBoxContainer/RegisterButton
 

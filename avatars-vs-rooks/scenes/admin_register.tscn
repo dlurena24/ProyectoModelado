@@ -51,7 +51,11 @@ text = "Seleccionar Foto de Perfil"
 layout_mode = 2
 
 [node name="FileDialog" type="FileDialog" parent="VBoxContainer"]
-filters = PackedStringArray("*.png", "*.jpg")
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png", "*.jpg", "*.jpeg", "*.webp")
 
 [node name="PasswordInput" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
