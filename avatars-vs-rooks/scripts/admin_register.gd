@@ -77,19 +77,41 @@ func _on_user_signed_up(user_data: Dictionary):
 	print("¡Admin registrado! UID:", uid)
 	error_label.text = "Subiendo foto de perfil..."
 
-	# Subir foto a Firebase Storage
+	# --- Subir foto a Firebase Storage ---
 	var file_name = profile_picture_path.get_file()
 	var storage_path = "profile_pictures/%s/%s" % [uid, file_name]
-	var upload_task = Firebase.Storage.upload(profile_picture_path, storage_path)
-	var upload_result = await upload_task
 
-	if upload_result.is_exception():
-		error_label.text = "Error al subir la foto."
+	# Crear referencia a esa ruta en el Storage
+	var ref = Firebase.Storage.ref(storage_path)
+
+	# Leer el archivo local como bytes
+	var file = FileAccess.open(profile_picture_path, FileAccess.READ)
+	if file == null:
+		error_label.text = "❌ No se pudo abrir la imagen local."
 		return
 
-	# Obtener URL de descarga
-	var url_task = Firebase.Storage.get_download_url(storage_path)
-	var download_url = await url_task
+	var file_data = file.get_buffer(file.get_length())
+	file.close()
+
+	# Crear encabezados
+	var headers = PackedStringArray(["Content-Type: image/png"]) # o image/png si aplica
+
+	# Subir el archivo al Storage
+	var upload_result = await Firebase.Storage._upload(file_data, headers, ref, false)
+
+	if upload_result == null or (typeof(upload_result) == TYPE_DICTIONARY and upload_result.has("error")):
+		error_label.text = "❌ Error al subir la foto a Firebase Storage."
+		print("Error al subir:", upload_result)
+		return
+
+	# Obtener URL pública de descarga
+	var url_result = await Firebase.Storage._download(ref, false, true)
+	if url_result == null or url_result == "":
+		error_label.text = "⚠️ No se pudo obtener el enlace de descarga."
+		return
+
+	var download_url = url_result
+	print("📸 URL pública de la imagen:", download_url)
 
 	error_label.text = "Guardando datos del administrador..."
 
@@ -118,9 +140,6 @@ func save_admin_to_firestore(uid: String, data: Dictionary) -> void:
 	var url = "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/users/%s" % [project_id, uid]
 	var headers = ["Content-Type: application/json"]
 
-	# Si quieres guardar usando autenticación:
-	# var id_token = Firebase.Auth.auth["idtoken"]
-	# headers.append("Authorization: Bearer " + id_token)
 
 	var body_dict = {
 		"fields": {
