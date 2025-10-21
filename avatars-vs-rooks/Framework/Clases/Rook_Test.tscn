@@ -1,8 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://braqukx2xq1o1"]
+[gd_scene load_steps=3 format=3 uid="uid://braqukx2xq1o1"]
 
 [ext_resource type="Script" uid="uid://bwsvf1348757j" path="res://Framework/Clases/Rook_Test.gd" id="1_ig0ix"]
+[ext_resource type="Texture2D" uid="uid://x2nxdi2rga0b" path="res://Assets/RookTest.png" id="2_u5j85"]
 
 [node name="Rook_Test" type="Node2D"]
 script = ExtResource("1_ig0ix")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="RookTest" type="Sprite2D" parent="."]
+position = Vector2(1.1920929e-07, 7.6293945e-06)
+scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_u5j85")

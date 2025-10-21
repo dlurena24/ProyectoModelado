@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpjievlg88054"]
+
+[ext_resource type="Script" uid="uid://udiycafslys5" path="res://Framework/Clases/cursor_rook.gd" id="1_hgxmu"]
+
+[node name="Cursor_Rook" type="Node2D"]
+self_modulate = Color(1, 1, 1, 0.5019608)
+script = ExtResource("1_hgxmu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
