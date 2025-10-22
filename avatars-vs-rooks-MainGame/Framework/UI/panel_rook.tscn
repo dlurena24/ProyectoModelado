@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv0gdna6uij50"]
+
+[ext_resource type="Script" uid="uid://bj1uru0p18x4g" path="res://Framework/UI/panel_rook.gd" id="1_ad0hc"]
+[ext_resource type="Texture2D" uid="uid://x2nxdi2rga0b" path="res://Assets/RookTest.png" id="1_qbvs0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbvs0"]
+bg_color = Color(0, 0, 0, 0.3137255)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ad0hc"]
+bg_color = Color(0.25882354, 0.99607843, 0.1882353, 0.49019608)
+
+[node name="PanelRook" type="Panel"]
+custom_minimum_size = Vector2(127, 127)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ad0hc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.9999695
+offset_top = 10.9999695
+offset_right = 910.0
+offset_bottom = 908.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_qbvs0")
+expand_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_qbvs0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ad0hc")
+show_percentage = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 83.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "xx"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
