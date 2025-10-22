@@ -24,6 +24,7 @@ func rook_seleccionado(panel_rook: PanelRook) :
 		nivel_actual.mostrar_celdas(true)
 	
 func actualizar_celda_actual(pos : Vector2i, celda : Celda_Rook) :
+	print("AJAA")
 	cursor_rook.establecer_celda_valida(rooks_colocados.has(pos))
 	posicion_actual = pos
 	celda_actual = celda
@@ -31,7 +32,7 @@ func actualizar_celda_actual(pos : Vector2i, celda : Celda_Rook) :
 func intentar_colocar_rook() :
 	if panel_rook_actual:
 		# Crear una instancia de Rook a colocar
-		var nuevo_rook = panel_rook_actual.rool_a_colocar.instantiate()
+		var nuevo_rook = panel_rook_actual.rook_a_colocar.instantiate()
 		# Agregar Rook al nodo del mundo
 		nivel_actual.rooks.add_child(nuevo_rook)
 		# Colocarle la posicion global

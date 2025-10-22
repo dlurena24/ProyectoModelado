@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnekbr1xujlq"]
+[gd_scene load_steps=3 format=3 uid="uid://bnekbr1xujlq"]
 
 [ext_resource type="PackedScene" uid="uid://dv0gdna6uij50" path="res://Framework/UI/panel_rook.tscn" id="1_l2hkw"]
 [ext_resource type="Texture2D" uid="uid://de3oteqca2a2g" path="res://Assets/RookTestResized.png" id="2_vsbvt"]
-[ext_resource type="PackedScene" uid="uid://do0jscpf10wre" path="res://Framework/Objetos/Rooks/rook_test_1.tscn" id="3_vsbvt"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -33,9 +32,7 @@ grow_vertical = 2
 [node name="PanelRook" parent="Panel/VBoxContainer" instance=ExtResource("1_l2hkw")]
 layout_mode = 2
 textura = ExtResource("2_vsbvt")
-rool_a_colocar = ExtResource("3_vsbvt")
 
 [node name="PanelRook2" parent="Panel/VBoxContainer" instance=ExtResource("1_l2hkw")]
 layout_mode = 2
 textura = ExtResource("2_vsbvt")
-rool_a_colocar = ExtResource("3_vsbvt")

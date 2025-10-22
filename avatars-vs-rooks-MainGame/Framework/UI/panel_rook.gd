@@ -4,7 +4,7 @@ extends Panel
 @export var textura : Texture2D
 @export var tiempo_de_recuperacion : float = 2.0
 @export var precio_monedas : int = 5
-@export var rool_a_colocar : PackedScene
+@export var rook_a_colocar : PackedScene
 
 func _ready():
 	# Parametros iniciales
