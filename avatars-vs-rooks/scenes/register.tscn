@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://dk61mwups42o8"]
+
+[ext_resource type="Script" uid="uid://eybtmrwxexc7" path="res://scripts/register.gd" id="1_gvynn"]
+
+[node name="Register" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_gvynn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 250.0
+offset_bottom = 225.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Crear Cuenta"
+
+[node name="NameInput" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "Nombre de usuario"
+
+[node name="EmailInput" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "Correo electrónico"
+
+[node name="PasswordInput" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Contraseña"
+secret = true
+
+[node name="RegisterButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Registrar"
+
+[node name="GoogleButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00392157, 0.00392157, 0.00392157, 1)
+text = "Continuar con Google"
+
+[node name="ErrorLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ToLoginButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "¿Ya tienes cuenta? Inicia Sesión"

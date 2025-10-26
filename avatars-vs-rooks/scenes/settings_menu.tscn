@@ -1,0 +1,93 @@
+[gd_scene load_steps=4 format=3 uid="uid://btsgx4wkk3x2e"]
+
+[ext_resource type="Script" uid="uid://n0w4vwuichi6" path="res://scripts/settings_menu.gd" id="1_05p07"]
+[ext_resource type="Script" uid="uid://brj8g6rapyi73" path="res://scripts/BackgroundColorController.gd" id="2_cr101"]
+[ext_resource type="Script" uid="uid://d2tqljltrtjio" path="res://scripts/spotify_api.gd" id="3_wswnh"]
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_05p07")
+
+[node name="SpotifyAPI" type="Node" parent="."]
+script = ExtResource("3_wswnh")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_cr101")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Resolución"
+
+[node name="ResolutionOption" type="OptionButton" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Tema"
+
+[node name="ThemeOption" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label6" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Paleta de Colores"
+
+[node name="ColorPickers" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Color1" type="ColorPickerButton" parent="VBoxContainer/ColorPickers"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+
+[node name="Color2" type="ColorPickerButton" parent="VBoxContainer/ColorPickers"]
+layout_mode = 2
+
+[node name="Color3" type="ColorPickerButton" parent="VBoxContainer/ColorPickers"]
+visible = false
+layout_mode = 2
+
+[node name="Color4" type="ColorPickerButton" parent="VBoxContainer/ColorPickers"]
+visible = false
+layout_mode = 2
+
+[node name="Color5" type="ColorPickerButton" parent="VBoxContainer/ColorPickers"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Música de Fondo (Spotify)"
+
+[node name="SpotifyInput" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MusicToggle" type="CheckButton" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Volumen"
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Guardar y Volver\""
