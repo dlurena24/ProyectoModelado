@@ -27,8 +27,13 @@ func _ready():
 	
 	save_button.pressed.connect(_on_save_button_pressed)
 	spotify_input.text_submitted.connect(_on_spotify_input_submitted)
+	
+	#Configurar Usuario
 	if GlobalSettings.current_user_uid != "":
 		setup_for_user(GlobalSettings.current_user_uid)
+	else:
+		push_error("No hay usuario autenticado en GlobalSettings")
+		current_user_uid = ""
 
 	# Aplicar colores actuales desde GlobalSettings
 	_update_preview_from_globals()
@@ -133,16 +138,32 @@ func apply_settings() -> void:
 
 # --- SINCRONIZAR EN FIRESTORE ---
 func save_to_firestore() -> void:
-	if current_user_uid == "":
+	print("💾 ===== GUARDANDO EN FIRESTORE =====")
+	print("-User UID: ", current_user_uid)
+	print("-GlobalSettings.current_user_uid: ", GlobalSettings.current_user_uid)
+	
+	# ✅ Usar GlobalSettings si current_user_uid está vacío
+	var uid_to_use = current_user_uid if current_user_uid != "" else GlobalSettings.current_user_uid
+	
+	if uid_to_use == "":
+		push_error("❌ No hay UID disponible para guardar en Firestore")
 		return
 
+	print("✅ Usando UID:", uid_to_use)
+
 	var project_id = "avatarsvsrooksproject"
-	var url = "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/users/%s?updateMask.fieldPaths=settings" % [project_id, current_user_uid]
+	
+	# ✅ ARREGLADO: Usar uid_to_use en la URL
+	var url = "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/users/%s?updateMask.fieldPaths=settings" % [project_id, uid_to_use]
 	var headers = ["Content-Type: application/json"]
+	
+	print("📡 URL:", url)
 
 	var colors_array = []
 	for btn in color_buttons:
-		colors_array.append({"stringValue": btn.color.to_html()})
+		var color_html = btn.color.to_html()
+		print("  🎨 Color:", color_html)
+		colors_array.append({"stringValue": color_html})
 
 	var settings_data = {
 		"fields": {
@@ -151,10 +172,9 @@ func save_to_firestore() -> void:
 					"fields": {
 						"theme": {"stringValue": theme_option.get_item_text(theme_option.selected)},
 						"spotify_url": {"stringValue": spotify_input.text},
-						"music_enabled": {"booleanValue": music_toggle.toggled},
+						"music_enabled": {"booleanValue": music_toggle.button_pressed},
 						"colors": {"arrayValue": {"values": colors_array}},
-						"volume_db": {"integerValue": str(volume_slider.value)},
-						#"resolution_index": {"integerValue": str(resolution_option.selected)}
+						"volume_db": {"integerValue": str(int(volume_slider.value))}
 					}
 				}
 			}
@@ -162,11 +182,35 @@ func save_to_firestore() -> void:
 	}
 
 	var body = JSON.stringify(settings_data)
+	print("📦 JSON body:")
+	print(body)
+	
 	var request = HTTPRequest.new()
 	add_child(request)
-	request.request(url, headers, HTTPClient.METHOD_PATCH, body)
-	print("☁️ Configuración sincronizada en Firestore para UID:", current_user_uid)
-
+	
+	var err = request.request(url, headers, HTTPClient.METHOD_PATCH, body)
+	if err != OK:
+		push_error("❌ Error al iniciar request:", err)
+		request.queue_free()
+		return
+	
+	# ✅ ESPERAR la respuesta
+	var response = await request.request_completed
+	var status_code = response[1]
+	var response_body = response[3].get_string_from_utf8()
+	
+	print("📡 Status code:", status_code)
+	print("📦 Response body:")
+	print(response_body)
+	
+	request.queue_free()
+	
+	if status_code == 200:
+		print("☁️ ✅ Configuración REALMENTE sincronizada en Firestore para UID:", uid_to_use)
+	else:
+		push_error("❌ Error al guardar. Status:", status_code)
+	
+	print("💾 ===== FIN GUARDADO =====")
 
 # --- Mostrar vista previa inicial ---
 func _update_preview_from_globals():

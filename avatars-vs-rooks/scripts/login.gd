@@ -53,22 +53,21 @@ func _on_user_signed_in(user_data: Dictionary):
 
 	print("✅ Inicio de sesión exitoso. UID:", uid)
 	error_label.text = "Cargando configuración del usuario..."
-	
 	# Guardamos el UID globalmente
 	GlobalSettings.current_user_uid = uid
-	
 	# Cargamos desde Firestore los datos del tema y configuración completa
-	await GlobalSettings.load_user_theme_from_firestore(uid)
 	await GlobalSettings.load_user_settings_from_firestore(uid)
-	
 	# Aplicar tema y configuración cargada
 	GlobalSettings.update_theme()
-
+	print("===============================================")
+	print("🔍 DESPUÉS DE CARGAR SETTINGS:")
+	print("  - Colors:", GlobalSettings.current_settings["colors"])
+	print("  - Theme:", GlobalSettings.current_settings["theme"])
+	print("===============================================")
 	# --- Verificar si el usuario existe en Firestore ---
 	var project_id = "avatarsvsrooksproject"
 	var url = "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/users/%s" % [project_id, uid]
 	var headers = ["Content-Type: application/json"]
-
 	var get_request := HTTPRequest.new()
 	add_child(get_request)
 	var err = get_request.request(url, headers, HTTPClient.METHOD_GET)
@@ -81,10 +80,19 @@ func _on_user_signed_in(user_data: Dictionary):
 	var response_code = signal_args[1]
 	var body_bytes = signal_args[3]
 	var response_text = body_bytes.get_string_from_utf8()
+	
+	print("===============================================")
+	print("🔍 VERIFICANDO EXISTENCIA DEL USUARIO")
+	print("📡 URL:", url)
+	print("📡 Response code:", response_code)
+	print("📦 Response body (primeros 500 chars):")
+	print(response_text.substr(0, 500))
+	print("===============================================")
+	
 	var json = JSON.parse_string(response_text)
 	get_request.queue_free()
 
-	if response_code != 200 or json == null or not json.has("fields"):
+	if response_code == 404:
 		print("⚠️ Usuario no encontrado en Firestore. Creando nuevo documento...")
 		
 		var new_user_data = {

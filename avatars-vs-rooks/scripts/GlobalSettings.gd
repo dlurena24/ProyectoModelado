@@ -122,10 +122,17 @@ func load_user_theme_from_firestore(uid: String):
 
 # --- Cargar configuración completa ---
 func load_user_settings_from_firestore(uid: String):
+	
+	print("🔍 ========================================")
+	print("🔍 CARGANDO SETTINGS DESDE FIRESTORE")
+	print("🔍 UID:", uid)
+	
 	current_user_uid = uid
 	var project_id = "avatarsvsrooksproject"
 	var url = "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/users/%s" % [project_id, uid]
 	var headers = ["Content-Type: application/json"]
+	
+	print("🔍 URL:", url)
 
 	var request := HTTPRequest.new()
 	add_child(request)
@@ -138,15 +145,36 @@ func load_user_settings_from_firestore(uid: String):
 	var signal_args: Array = await request.request_completed
 	var body_bytes: PackedByteArray = signal_args[3]
 	var json_text: String = body_bytes.get_string_from_utf8()
+	
+	print("📦 Response (primeros 1000 chars):")
+	print(json_text.substr(0, 1000))
+	print("🔍 ========================================")
+	
 	var data: Variant = JSON.parse_string(json_text)
 	request.queue_free()
 
-	if data == null or not data.has("fields") or not data["fields"].has("settings"):
-		print("⚠️ No hay configuraciones guardadas para este usuario.")
+	if data == null:
+		print("❌ JSON parse falló - data es null")
 		reset_to_defaults()
 		return
-
+	
+	if not data.has("fields"):
+		print("❌ Response no tiene 'fields'")
+		print("📋 Keys en response:", data.keys() if typeof(data) == TYPE_DICTIONARY else "No es diccionario")
+		reset_to_defaults()
+		return
+		
+	print("✅ Response tiene 'fields'")
+	print("📋 Keys en fields:", data["fields"].keys())
+	
+	if not data["fields"].has("settings"):
+		print("❌ NO tiene campo 'settings'")
+		reset_to_defaults()
+		return
+	print("✅ Tiene campo 'settings'")
+	
 	var settings_map: Dictionary = data["fields"]["settings"]["mapValue"]["fields"]
+	print("📋 Keys en settings:", settings_map.keys())
 
 	current_settings["theme"] = settings_map.get("theme", {}).get("stringValue", "Oscuro")
 	current_settings["spotify_url"] = settings_map.get("spotify_url", {}).get("stringValue", "")
