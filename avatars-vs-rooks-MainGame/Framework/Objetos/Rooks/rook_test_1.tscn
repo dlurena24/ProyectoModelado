@@ -1,5 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://do0jscpf10wre"]
+[gd_scene load_steps=3 format=3 uid="uid://do0jscpf10wre"]
 
 [ext_resource type="PackedScene" uid="uid://braqukx2xq1o1" path="res://Framework/Clases/Rook_Test.tscn" id="1_rb0ea"]
+[ext_resource type="Texture2D" uid="uid://de3oteqca2a2g" path="res://Assets/RookTestResized.png" id="2_3ca4d"]
 
 [node name="Rook_Test1" instance=ExtResource("1_rb0ea")]
+
+[node name="Sprite2D" parent="." index="2"]
+scale = Vector2(1, 1)
+texture = ExtResource("2_3ca4d")
