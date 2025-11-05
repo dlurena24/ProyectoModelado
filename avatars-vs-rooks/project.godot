@@ -22,6 +22,8 @@ GlobalSettings="*res://scripts/GlobalSettings.gd"
 ThemeManager="*res://scripts/ThemeManager.gd"
 BackgroundColorController="*res://scripts/BackgroundColorController.gd"
 SpotifyApi="*res://scripts/spotify_api.gd"
+AuthUtils="*res://scripts/AuthUtils.gd"
+FirestoreService="*res://scripts/FirestoreService.gd"
 
 [dotnet]
 

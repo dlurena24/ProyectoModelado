@@ -1,200 +1,203 @@
 extends Node
 
-const DEFAULT_SETTINGS = {
+signal user_profile_changed(profile: Dictionary)
+
+const DEFAULT_SETTINGS := {
 	"theme": "Claro",
 	"volume_db": 0,
 	"music_enabled": false,
 	"spotify_url": "",
-	"colors": [],
+	"colors": [],        # Personalizado: [bg, text]
 	"resolution_index": 0
 }
 
 var background_color: Color = Color.BLACK
 var text_color: Color = Color.WHITE
+
 var current_user_uid: String = ""
-var current_settings: Dictionary = DEFAULT_SETTINGS.duplicate()
+var current_settings: Dictionary = DEFAULT_SETTINGS.duplicate(true)
+var user_profile: Dictionary = {}  # { uid, role, username, name, profile_picture_url, profile_picture_path }
 
-# --- Reiniciar configuración por defecto ---
-func reset_to_defaults():
-	current_settings = DEFAULT_SETTINGS.duplicate()
-	print("⚙️ GlobalSettings reseteado a valores por defecto.")
-	set_theme_dark()
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), current_settings.volume_db)
+func set_current_user(uid: String) -> void:
+	current_user_uid = uid
 
-# --- TEMAS BASE ---
-func set_theme_light():
+# ---------- helpers ----------
+func _nz_str(v: Variant) -> String:
+	if v == null:
+		return ""
+	var s := str(v)
+	return "" if s == "<null>" else s
+
+func _auto_contrast(bg: Color) -> Color:
+	var luma: float = 0.2126 * bg.r + 0.7152 * bg.g + 0.0722 * bg.b
+	return Color(0,0,0) if luma > 0.6 else Color(1,1,1)
+
+# ---------- Temas ----------
+func set_theme_light() -> void:
 	current_settings["theme"] = "Claro"
-	if current_settings["colors"].is_empty():
-		background_color = Color(0.95, 0.95, 0.95) # Fondo blanco
-		text_color = Color(0.1, 0.1, 0.1)          # Texto negro
+	current_settings["colors"] = []
+	background_color = Color(0.95, 0.95, 0.95)
+	text_color = Color(0.10, 0.10, 0.10)
 	update_theme()
 
-func set_theme_dark():
+func set_theme_dark() -> void:
 	current_settings["theme"] = "Oscuro"
-	if current_settings["colors"].is_empty():
-		background_color = Color(0.08, 0.08, 0.08) # Fondo negro
-		text_color = Color(1, 1, 1)                # Texto blanco
+	current_settings["colors"] = []
+	background_color = Color(0.08, 0.08, 0.08)
+	text_color = Color(1, 1, 1)
 	update_theme()
 
-# --- Colores personalizados ---
-func apply_custom_colors(colors: Array):
-	if colors.size() >= 2:
-		current_settings["colors"] = colors
-		background_color = colors[0]
-		text_color = colors[1]
-	update_theme()
+# Personalizado usa SOLO Color1 (bg) y Color2 (text)
+func apply_palette_or_theme(palette: Array, theme_name: String) -> void:
+	current_settings["theme"] = theme_name
 
-# --- Aplicar visualmente ---
-func update_theme():
+	if theme_name == "Personalizado":
+		var bg: Color = Color(0.1, 0.1, 0.1)
+		var txt: Color = Color(1, 1, 1)
+
+		if palette.size() >= 1:
+			var p0: Variant = palette[0]
+			if p0 is Color:
+				bg = p0
+			else:
+				bg = Color(str(p0))
+
+		if palette.size() >= 2:
+			var p1: Variant = palette[1]
+			if p1 is Color:
+				txt = p1
+			else:
+				txt = Color(str(p1))
+		else:
+			# Si no hay Color2, calculamos un texto con buen contraste
+			txt = _auto_contrast(bg)
+
+		current_settings["colors"] = [bg, txt]
+		background_color = bg
+		text_color = txt
+	else:
+		# Claro/Oscuro: ignorar paleta
+		current_settings["colors"] = []
+		if theme_name == "Claro":
+			background_color = Color(0.95, 0.95, 0.95)
+			text_color = Color(0.10, 0.10, 0.10)
+		else:
+			background_color = Color(0.08, 0.08, 0.08)
+			text_color = Color(1, 1, 1)
+
+	update_theme()
+	
+	
+func update_theme() -> void:
 	ProjectSettings.set_setting("rendering/environment/defaults/default_clear_color", background_color)
+	var root: Node = get_tree().current_scene if get_tree().current_scene != null else get_tree().root
+	if root != null:
+		_apply_theme_recursive(root)
 
-	for node in get_tree().get_nodes_in_group("ui_text"):
-		if node is Label or node is Button or node is RichTextLabel or node is CheckButton or node is OptionButton or node is LineEdit:
-			node.add_theme_color_override("font_color", text_color)
+func _apply_theme_recursive(node: Node) -> void:
+	if node is Label:
+		(node as Label).add_theme_color_override("font_color", text_color)
+	elif node is Button:
+		_set_colors(node as Control, [
+			"font_color","font_hover_color","font_pressed_color","font_focus_color","font_disabled_color"
+		], text_color)
+	elif node is LineEdit:
+		var le := node as LineEdit
+		le.add_theme_color_override("font_color", text_color)
+		le.add_theme_color_override("caret_color", text_color)
+		le.add_theme_color_override("font_placeholder_color", text_color.lerp(background_color, 0.5))
+	elif node is OptionButton:
+		_set_colors(node as Control, [
+			"font_color","font_hover_color","font_pressed_color","font_focus_color","font_disabled_color"
+		], text_color)
+		(node as OptionButton).add_theme_color_override("arrow_color", text_color)
+	elif (node is CheckBox) or (node is CheckButton):
+		_set_colors(node as Control, [
+			"font_color","font_hover_color","font_pressed_color","font_focus_color","font_disabled_color"
+		], text_color)
+	elif node is RichTextLabel:
+		(node as RichTextLabel).add_theme_color_override("default_color", text_color)
 
-# --- Guardar tema en Firestore ---
+	for child in node.get_children():
+		if child is Node:
+			_apply_theme_recursive(child)
+
+func _set_colors(c: Control, keys: Array, col: Color) -> void:
+	for k in keys:
+		c.add_theme_color_override(k, col)
+
+# ---------- Firestore: SETTINGS ----------
 func save_user_theme_to_firestore() -> void:
-	if current_user_uid.is_empty():
+	if current_user_uid == "":
+		push_warning("No hay UID para guardar tema.")
 		return
 
-	var project_id = "avatarsvsrooksproject"
-	var url = "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/users/%s" % [project_id, current_user_uid]
-	var headers = ["Content-Type: application/json"]
+	var colors_html: Array = []
+	for c in current_settings.get("colors", []):
+		var col: Color = c if c is Color else Color(str(c))
+		colors_html.append(col.to_html())
 
-	var data = {
-		"fields": {
-			"theme": {"stringValue": current_settings["theme"]},
-			"theme_background": {"stringValue": background_color.to_html()},
-			"theme_text": {"stringValue": text_color.to_html()}
-		}
+	var data := {
+		"settings": {
+			"theme": str(current_settings.get("theme","Oscuro")),
+			"spotify_url": str(current_settings.get("spotify_url","")),
+			"music_enabled": bool(current_settings.get("music_enabled", false)),
+			"volume_db": int(current_settings.get("volume_db", 0)),
+			"resolution_index": int(current_settings.get("resolution_index", 0)),
+			"colors": colors_html
+		},
+		"theme_background": background_color.to_html(),
+		"theme_text": text_color.to_html()
+	}
+	var ok: bool = await FirestoreService.upsert_user(current_user_uid, data) # ← merge con updateMask
+	if not ok:
+		push_error("No se pudo guardar el tema en Firestore.")
+	update_theme()
+
+func load_user_settings_from_firestore(uid: String) -> void:
+	current_user_uid = uid
+	var s: Dictionary = await FirestoreService.get_user_settings(uid)
+	if s.is_empty():
+		set_theme_dark()
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), 0.0)
+		return
+
+	current_settings["theme"] = str(s.get("theme","Oscuro"))
+	current_settings["spotify_url"] = str(s.get("spotify_url",""))
+	current_settings["music_enabled"] = bool(s.get("music_enabled", false))
+	current_settings["volume_db"] = int(s.get("volume_db", 0))
+	current_settings["resolution_index"] = int(s.get("resolution_index", 0))
+
+	# reconstruir paleta (máx 2)
+	current_settings["colors"] = []
+	if s.has("colors") and s["colors"] is Array:
+		for entry in s["colors"]:
+			if current_settings["colors"].size() >= 2:
+				break
+			var col: Color = entry if entry is Color else Color(str(entry))
+			current_settings["colors"].append(col)
+
+	var th := str(current_settings["theme"])
+	if th == "Claro":
+		set_theme_light()
+	elif th == "Personalizado" and not current_settings["colors"].is_empty():
+		apply_palette_or_theme(current_settings["colors"], "Personalizado")
+	else:
+		set_theme_dark()
+
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), float(current_settings["volume_db"]))
+
+# ---------- Firestore: PERFIL ----------
+func load_user_profile(uid: String) -> void:
+	var p: Dictionary = await FirestoreService.get_user_profile(uid)
+
+	user_profile = {
+		"uid": uid,
+		"role": _nz_str(p.get("role","user")),
+		"username": _nz_str(p.get("username","")),
+		"name": _nz_str(p.get("name","")),
+		"profile_picture_url": _nz_str(p.get("profile_picture_url","")),
+		"profile_picture_path": _nz_str(p.get("profile_picture_path",""))
 	}
 
-	var body = JSON.stringify(data)
-	var request := HTTPRequest.new()
-	add_child(request)
-	await request.request(url, headers, HTTPClient.METHOD_PATCH, body)
-	print("🎨 Tema guardado para UID:", current_user_uid)
-	request.queue_free()
-
-# --- Cargar tema ---
-func load_user_theme_from_firestore(uid: String):
-	current_user_uid = uid
-	var project_id = "avatarsvsrooksproject"
-	var url = "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/users/%s" % [project_id, uid]
-	var headers = ["Content-Type: application/json"]
-
-	var request := HTTPRequest.new()
-	add_child(request)
-	var err = request.request(url, headers, HTTPClient.METHOD_GET)
-	if err != OK:
-		push_error("Error al iniciar HTTPRequest (load_user_theme)")
-		request.queue_free()
-		return
-
-	var signal_args: Array = await request.request_completed
-	var body_bytes: PackedByteArray = signal_args[3]
-	var json_text: String = body_bytes.get_string_from_utf8()
-	var data: Variant = JSON.parse_string(json_text)
-	request.queue_free()
-
-	if data == null or not data.has("fields"):
-		print("⚠️ No se encontraron datos de tema en Firestore. Cargando por defecto.")
-		reset_to_defaults()
-		return
-
-	var fields: Dictionary = data["fields"]
-	if fields.has("theme"):
-		current_settings["theme"] = fields["theme"]["stringValue"]
-
-	if fields.has("theme_background"):
-		background_color = Color(fields["theme_background"]["stringValue"])
-
-	if fields.has("theme_text"):
-		text_color = Color(fields["theme_text"]["stringValue"])
-
-	# Aplicar tema correspondiente
-	if current_settings["theme"] == "Claro":
-		set_theme_light()
-	else:
-		set_theme_dark()
-
-	update_theme()
-
-# --- Cargar configuración completa ---
-func load_user_settings_from_firestore(uid: String):
-	
-	print("🔍 ========================================")
-	print("🔍 CARGANDO SETTINGS DESDE FIRESTORE")
-	print("🔍 UID:", uid)
-	
-	current_user_uid = uid
-	var project_id = "avatarsvsrooksproject"
-	var url = "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/users/%s" % [project_id, uid]
-	var headers = ["Content-Type: application/json"]
-	
-	print("🔍 URL:", url)
-
-	var request := HTTPRequest.new()
-	add_child(request)
-	var err = request.request(url, headers, HTTPClient.METHOD_GET)
-	if err != OK:
-		push_error("Error al iniciar HTTPRequest (load_user_settings)")
-		request.queue_free()
-		return
-
-	var signal_args: Array = await request.request_completed
-	var body_bytes: PackedByteArray = signal_args[3]
-	var json_text: String = body_bytes.get_string_from_utf8()
-	
-	print("📦 Response (primeros 1000 chars):")
-	print(json_text.substr(0, 1000))
-	print("🔍 ========================================")
-	
-	var data: Variant = JSON.parse_string(json_text)
-	request.queue_free()
-
-	if data == null:
-		print("❌ JSON parse falló - data es null")
-		reset_to_defaults()
-		return
-	
-	if not data.has("fields"):
-		print("❌ Response no tiene 'fields'")
-		print("📋 Keys en response:", data.keys() if typeof(data) == TYPE_DICTIONARY else "No es diccionario")
-		reset_to_defaults()
-		return
-		
-	print("✅ Response tiene 'fields'")
-	print("📋 Keys en fields:", data["fields"].keys())
-	
-	if not data["fields"].has("settings"):
-		print("❌ NO tiene campo 'settings'")
-		reset_to_defaults()
-		return
-	print("✅ Tiene campo 'settings'")
-	
-	var settings_map: Dictionary = data["fields"]["settings"]["mapValue"]["fields"]
-	print("📋 Keys en settings:", settings_map.keys())
-
-	current_settings["theme"] = settings_map.get("theme", {}).get("stringValue", "Oscuro")
-	current_settings["spotify_url"] = settings_map.get("spotify_url", {}).get("stringValue", "")
-	current_settings["music_enabled"] = settings_map.get("music_enabled", {}).get("booleanValue", false)
-	current_settings["volume_db"] = int(settings_map.get("volume_db", {}).get("integerValue", "0"))
-	current_settings["resolution_index"] = int(settings_map.get("resolution_index", {}).get("integerValue", "0"))
-
-	if settings_map.has("colors"):
-		var arr: Array = []
-		for color_entry in settings_map["colors"]["arrayValue"]["values"]:
-			arr.append(Color(color_entry["stringValue"]))
-		current_settings["colors"] = arr
-
-	# Aplicar según el tema y colores
-	if not current_settings["colors"].is_empty():
-		apply_custom_colors(current_settings["colors"])
-	elif current_settings["theme"] == "Claro":
-		set_theme_light()
-	else:
-		set_theme_dark()
-
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), current_settings["volume_db"])
-	print("✅ Configuración cargada para UID:", uid)
+	emit_signal("user_profile_changed", user_profile)

@@ -5,12 +5,25 @@
 [node name="Register" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+offset_left = -3.0
+offset_top = -10.0
+offset_right = 1154.0
+offset_bottom = 648.0
 script = ExtResource("1_i7res")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-offset_right = 250.0
-offset_bottom = 225.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -217.0
+offset_top = -178.0
+offset_right = 217.0
+offset_bottom = 178.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -21,6 +34,18 @@ text = "Crear Cuenta"
 layout_mode = 2
 size_flags_vertical = 4
 placeholder_text = "Nombre de usuario"
+
+[node name="FirstNameInput" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Nombre de pila"
+
+[node name="LastNameInput" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Apellidos "
+
+[node name="NationalityInput" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Nacionalidad"
 
 [node name="EmailInput" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
@@ -65,6 +90,10 @@ secret = true
 [node name="RegisterButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Registrar"
+
+[node name="GoogleButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Registrarse con Google"
 
 [node name="ErrorLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
