@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://dv0gdna6uij50" path="res://Framework/UI/panel_rook.tscn" id="1_l2hkw"]
 [ext_resource type="Script" uid="uid://bcq2ki0c4ygp5" path="res://Framework/UI/Hud.gd" id="1_x2qqx"]
-[ext_resource type="Texture2D" uid="uid://dck6dq2xpugxi" path="res://Assets/sand canon.png" id="2_7p8qr"]
 [ext_resource type="Texture2D" uid="uid://de3oteqca2a2g" path="res://Assets/RookTestResized.png" id="2_vsbvt"]
 [ext_resource type="PackedScene" uid="uid://mp1dcctlcq6a" path="res://Framework/Objetos/Rooks/rook_sand.tscn" id="3_py7yy"]
 [ext_resource type="PackedScene" uid="uid://do0jscpf10wre" path="res://Framework/Objetos/Rooks/rook_test_1.tscn" id="3_vsbvt"]
+[ext_resource type="Texture2D" uid="uid://cxwj5ruetu70q" path="res://Assets/sandtowerResized.png" id="3_x2qqx"]
 [ext_resource type="Texture2D" uid="uid://c2rhktif4h2lp" path="res://Assets/Coins.png" id="7_3p0xa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u5w3p"]
@@ -31,6 +31,7 @@ offset_top = 53.0
 offset_right = 127.0
 offset_bottom = -60.0
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
@@ -42,7 +43,8 @@ grow_vertical = 2
 
 [node name="PanelRook" parent="Panel/VBoxContainer" instance=ExtResource("1_l2hkw")]
 layout_mode = 2
-textura = ExtResource("2_7p8qr")
+textura = ExtResource("3_x2qqx")
+precio_monedas = 50
 rook_a_colocar = ExtResource("3_py7yy")
 
 [node name="PanelRook2" parent="Panel/VBoxContainer" instance=ExtResource("1_l2hkw")]
@@ -50,26 +52,26 @@ layout_mode = 2
 textura = ExtResource("2_vsbvt")
 rook_a_colocar = ExtResource("3_vsbvt")
 
-[node name="Panel2" type="Panel" parent="."]
+[node name="PanelMonedas" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 12.0
 offset_right = 145.0
 offset_bottom = 37.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelMonedas"]
 layout_mode = 0
 offset_left = -1.0
 offset_top = -9.0
 offset_right = 109.0
 offset_bottom = 33.0
 
-[node name="TextureRect" type="TextureRect" parent="Panel2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelMonedas/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_u5w3p")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="Panel2/HBoxContainer"]
+[node name="Label" type="Label" parent="PanelMonedas/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4

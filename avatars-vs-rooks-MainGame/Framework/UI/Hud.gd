@@ -1,6 +1,6 @@
 extends Control
 
-@onready var cantidad_monedas: Label = $HBoxContainer/Label
+@onready var cantidad_monedas: Label = $PanelMonedas/HBoxContainer/Label
 
 func _ready() -> void:
 	Global.monedas_actualizadas.connect(actualizar_monedas)

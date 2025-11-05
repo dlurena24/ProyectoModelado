@@ -25,5 +25,6 @@ func crear_celdas():
 			var nueva_celda = celda_paquete.instantiate()
 			celdas.add_child(nueva_celda)
 			nueva_celda.position = Vector2(48.5, 48) + (Vector2(x,y) * Vector2(97, 96))
+			nueva_celda.posicion_celda = Vector2i(x,y)
 			
 	
