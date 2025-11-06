@@ -4,6 +4,8 @@ extends Control
 const SLIDES_FOLDER := "res://assets/tutorial"
 # A dónde ir al terminar / saltar el tutorial
 const RETURN_SCENE  := "res://scenes/game.tscn"
+# A donde ir al terminar la ultima imagen del turioral
+const MENU_SCENE := "res://scenes/main_menu.tscn"
 
 # Si prefieres definir manualmente el orden, llena este array y deja la carpeta vacía.
 var slide_paths: Array[String] = []  # ej: ["res://assets/tutorial/01_intro.png", "res://assets/tutorial/02_controles.png"]
@@ -102,7 +104,7 @@ func _on_next() -> void:
 		_on_finish()
 
 func _on_finish() -> void:
-	get_tree().change_scene_to_file(RETURN_SCENE)
+	get_tree().change_scene_to_file(MENU_SCENE)
 
 # ----------------- UI -----------------
 func _update_ui() -> void:
@@ -113,7 +115,7 @@ func _update_ui() -> void:
 	# estados de botones
 	prev_btn.disabled = (index <= 0)
 	next_btn.disabled = (slides.size() <= 0)
-	next_btn.text = "Jugar" if index >= slides.size() - 1 else "Siguiente"
+	next_btn.text = "Menu" if index >= slides.size() - 1 else "Siguiente"
 
 	# "Jugar" siempre visible
 	play_btn.visible = true
