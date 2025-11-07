@@ -8,3 +8,12 @@ extends Node2D
 
 func init_rook():
 	vida = vida_maxima
+	
+
+func recibir_ataque(cantidad: float):
+	vida -= cantidad
+	
+	if vida <= 0:
+		queue_free()
+		return
+	

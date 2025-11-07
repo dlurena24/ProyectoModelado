@@ -6,6 +6,8 @@
 
 [node name="Rook_Test1" instance=ExtResource("1_yc6su")]
 bala_instancia = ExtResource("2_tnxko")
+vida = 3.0
+vida_maxima = 3.0
 
 [node name="Sprite2D" parent="." index="2"]
 scale = Vector2(1, 1)

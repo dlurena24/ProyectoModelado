@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://braqukx2xq1o1"]
+[gd_scene load_steps=5 format=3 uid="uid://braqukx2xq1o1"]
 
 [ext_resource type="Script" uid="uid://bwsvf1348757j" path="res://Framework/Clases/Rook_Test.gd" id="1_ig0ix"]
 [ext_resource type="PackedScene" uid="uid://ctyejranyml37" path="res://Framework/Objetos/bala.tscn" id="2_dwhh3"]
 [ext_resource type="Texture2D" uid="uid://x2nxdi2rga0b" path="res://Assets/RookTest.png" id="2_u5j85"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwhh3"]
+size = Vector2(48, 88)
 
 [node name="Rook_Test" type="Node2D"]
 script = ExtResource("1_ig0ix")
@@ -20,3 +23,11 @@ texture = ExtResource("2_u5j85")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, 56)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_dwhh3")
+debug_color = Color(0.020337624, 0.65121406, 0, 0.41960785)

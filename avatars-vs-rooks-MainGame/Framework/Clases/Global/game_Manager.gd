@@ -1,6 +1,6 @@
 extends Node2D
 
-var nivel_actual : Nivel
+var nivel_actual : Mundo
 var cursor_rook : Cursor_Rook
 var celda_valida : bool = false
 var mostrar_cursor_rook : bool = false

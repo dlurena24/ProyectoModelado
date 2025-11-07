@@ -1,5 +1,4 @@
-class_name Nivel
-extends Node2D
+extends Mundo
 
 @onready var celdas: Node2D = $Celdas
 @onready var cursor_rook: Node2D = $Cursor_Rook
@@ -14,6 +13,9 @@ func _ready():
 	# Crear celdas
 	crear_celdas()
 	celdas.visible = false
+	
+	#Inicializar clase
+	inicializar_mundo()
 	
 func mostrar_celdas(valor : bool):
 	celdas.visible = valor
