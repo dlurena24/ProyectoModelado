@@ -10,5 +10,4 @@ vida = 3.0
 vida_maxima = 3.0
 
 [node name="Sprite2D" parent="." index="2"]
-scale = Vector2(1, 1)
 texture = ExtResource("2_yc6su")

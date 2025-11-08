@@ -1,15 +1,77 @@
-[gd_scene load_steps=5 format=3 uid="uid://braqukx2xq1o1"]
+[gd_scene load_steps=8 format=3 uid="uid://braqukx2xq1o1"]
 
 [ext_resource type="Script" uid="uid://bwsvf1348757j" path="res://Framework/Clases/Rook_Test.gd" id="1_ig0ix"]
 [ext_resource type="PackedScene" uid="uid://ctyejranyml37" path="res://Framework/Objetos/bala.tscn" id="2_dwhh3"]
-[ext_resource type="Texture2D" uid="uid://x2nxdi2rga0b" path="res://Assets/RookTest.png" id="2_u5j85"]
+[ext_resource type="Texture2D" uid="uid://de3oteqca2a2g" path="res://Assets/RookTestResized.png" id="3_dwhh3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwhh3"]
 size = Vector2(48, 88)
 
-[node name="Rook_Test" type="Node2D"]
+[sub_resource type="Animation" id="Animation_itwf8"]
+resource_name = "impacto"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000005),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0eiv6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xp71j"]
+_data = {
+&"RESET": SubResource("Animation_0eiv6"),
+&"impacto": SubResource("Animation_itwf8")
+}
+
+[node name="Rook_Test" type="Node2D" node_paths=PackedStringArray("animacion_impacto")]
 script = ExtResource("1_ig0ix")
 bala_instancia = ExtResource("2_dwhh3")
+animacion_impacto = NodePath("Animacion_impacto")
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -18,8 +80,7 @@ position = Vector2(1.1920929e-07, 7.6293945e-06)
 scale = Vector2(0.1, 0.1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_u5j85")
+texture = ExtResource("3_dwhh3")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, 56)
@@ -31,3 +92,8 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_dwhh3")
 debug_color = Color(0.020337624, 0.65121406, 0, 0.41960785)
+
+[node name="Animacion_impacto" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xp71j")
+}

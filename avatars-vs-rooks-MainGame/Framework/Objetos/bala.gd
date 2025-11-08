@@ -12,9 +12,12 @@ func _physics_process(delta: float) -> void:
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 
-func _on_body_entered(body: Node2D) -> void:
-	pass
-	#if body is Avatar:
-		## Animacion de impacto###
-		## Aplicar daño al avatar
-		#queue_free()
+func _on_area_entered(area: Area2D) -> void:
+	var target_avatar = area.get_parent()
+	if target_avatar is Avatar:
+			# Animacion de impacto###
+			# Aplicar daño al avatar
+			target_avatar.recibir_ataque(25)
+			
+			# Elimina bala
+			queue_free()

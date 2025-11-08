@@ -16,14 +16,14 @@ var enemigos_totales : int = 0
 @export var nodo_lineas : Node2D
 
 func inicializar_mundo():
-	#Crear temporizador
-	timer_oleada = Timer.new()
-	timer_oleada.one_shot = true
-	timer_oleada.autostart = false
-	timer_oleada.wait_time = tiempo_oleadas[0]
-	
-	timer_oleada.timeout.connect(inicializar_oleada)
-	timer_oleada.start()
+	##Crear temporizador
+	#timer_oleada = Timer.new()
+	#timer_oleada.one_shot = true
+	#timer_oleada.autostart = false
+	#timer_oleada.wait_time = tiempo_oleadas[0]
+	#
+	#timer_oleada.timeout.connect(inicializar_oleada)
+	#timer_oleada.start()
 	
 	# Calcular enemigos totales
 	for enemigos in enemigos_por_oleada:

@@ -1,3 +1,4 @@
+class_name Avatar
 extends CharacterBody2D
 
 enum {CAMINAR, ATACAR}
@@ -6,6 +7,11 @@ var direccion := -1
 var estado_actual = CAMINAR
 var estado_previo
 
+# Salud
+@export var salud_maxima : float = 100.0
+var salud_actual : float = 100.0
+
+# Ataque
 @export var ataque : float = 20
 @export var tiempo_de_ataque : float = 2.0
 @export var velocidad : float = 25.0
@@ -15,6 +21,7 @@ var rook_a_atacar : Rook_Base
 
 @onready var animacion: AnimationPlayer = $AnimationPlayer
 @onready var atacar_rook_timer: Timer = $AtacarRookTimer
+@onready var animacion_impacto: AnimationPlayer = $AnimacionImpacto
 
 
 func _physics_process(delta: float) -> void:
@@ -36,6 +43,9 @@ func _physics_process(delta: float) -> void:
 func _ready() -> void:
 	atacar_rook_timer.wait_time = tiempo_de_ataque
 	atacar_rook_timer.connect("timeout", atacar_rook)
+	
+	# Salud actual
+	salud_actual = salud_maxima
 
 func _on_detector_area_entered(area: Area2D) -> void:
 	estado_actual = ATACAR
@@ -52,3 +62,12 @@ func atacar_rook():
 	if rook_a_atacar != null:
 		rook_a_atacar.recibir_ataque(ataque)
 		atacar_rook_timer.start()
+		
+func recibir_ataque(cantidad: float):
+	salud_actual -= cantidad
+	
+	# Revisa si tiene salud
+	if salud_actual <= 0:
+		queue_free()
+		return
+	animacion_impacto.play("impacto")
