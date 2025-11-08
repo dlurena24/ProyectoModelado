@@ -5,20 +5,15 @@ extends Mundo
 @onready var rooks: Node2D = $Rooks
 
 @onready var timer_avatar_escudero: Timer = $TimerAvatarEscudero
+@onready var timer_monedas: Timer = $TimerMonedas
+
 
 # Avatars
 @export var escudero : PackedScene
 
-# Marcadores
-#@onready var marker_0: Marker2D = $Lineas/Marker0
-#@onready var marker_1: Marker2D = $Lineas/Marker1
-#@onready var marker_2: Marker2D = $Lineas/Marker2
-#@onready var marker_3: Marker2D = $Lineas/Marker3
-#@onready var marker_4: Marker2D = $Lineas/Marker4
+@export var moneda : PackedScene
 
-#var markers := [marker_0, marker_1, marker_2, marker_3, marker_4]
-
-@onready var marcadores = [
+@onready var marcadoresAvatars = [
 	$Lineas/Marker0,
 	$Lineas/Marker1,
 	$Lineas/Marker2,
@@ -26,6 +21,15 @@ extends Mundo
 	$Lineas/Marker4
 ]
 
+@onready var marcadoresMonedas = [
+	$MarMonedas/Marker2D,
+	$MarMonedas/Marker2D2, 
+	$MarMonedas/Marker2D3, 
+	$MarMonedas/Marker2D4,
+	$MarMonedas/Marker2D5, 
+	$MarMonedas/Marker2D6, 
+	$MarMonedas/Marker2D7
+]
 
 func _ready():
 	# Establecer variables del GameManager
@@ -41,6 +45,9 @@ func _ready():
 	
 	timer_avatar_escudero.start()
 	timer_avatar_escudero.timeout.connect(spawnear_escudero)
+	
+	timer_monedas.start()
+	timer_monedas.timeout.connect(spawnear_moneda)
 	randomize()
 	
 func mostrar_celdas(valor : bool):
@@ -60,5 +67,12 @@ func spawnear_escudero():
 	var escudero_a_colocar = escudero.instantiate()
 	get_tree().current_scene.add_child(escudero_a_colocar)
 	var marker_pos = randi_range(0, 4)
-	var marcador = marcadores[marker_pos]
+	var marcador = marcadoresAvatars[marker_pos]
 	escudero_a_colocar.global_position = marcador.global_position
+	
+func spawnear_moneda():
+	var moneda_a_colocar = moneda.instantiate()
+	get_tree().current_scene.add_child(moneda_a_colocar)
+	var marker_pos = randi_range(0, 6)
+	var marcador = marcadoresMonedas[marker_pos]
+	moneda_a_colocar.global_position = marcador.global_position
