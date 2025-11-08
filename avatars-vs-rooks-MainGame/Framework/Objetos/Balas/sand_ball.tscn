@@ -1,5 +1,5 @@
-[gd_scene load_steps=2 format=3 uid="uid://cemoniryxvhta"]
+[gd_scene load_steps=2 format=3 uid="uid://bopmguxsje50r"]
 
-[ext_resource type="PackedScene" uid="uid://ctyejranyml37" path="res://Framework/Objetos/bala.tscn" id="1_l7tlu"]
+[ext_resource type="PackedScene" uid="uid://ctyejranyml37" path="res://Framework/Objetos/bala.tscn" id="1_mldgw"]
 
-[node name="sand_Ball" instance=ExtResource("1_l7tlu")]
+[node name="sand_Ball" instance=ExtResource("1_mldgw")]

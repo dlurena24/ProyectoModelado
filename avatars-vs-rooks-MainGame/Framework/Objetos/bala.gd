@@ -2,6 +2,7 @@ class_name Bala
 extends Area2D
 
 var speed := 100.0
+var daño : int = 1
 
 func _ready() -> void:
 	$AnimatedSprite2D.play("default")
@@ -17,7 +18,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if target_avatar is Avatar:
 			# Animacion de impacto###
 			# Aplicar daño al avatar
-			target_avatar.recibir_ataque(25)
+			target_avatar.recibir_ataque(daño)
 			
 			# Elimina bala
 			queue_free()

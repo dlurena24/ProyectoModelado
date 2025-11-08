@@ -1,7 +1,7 @@
 class_name Rook_Test
 extends Rook_Base
 
-@export var daño_disparo : float = 25
+@export var daño_disparo : int = 25
 @export var tiempo_por_disparo : float = 1.0
 
 # Disparo
@@ -28,6 +28,7 @@ func disparar():
 		
 
 func spawnear_bala():
-	var bala : Bala = bala_instancia.instantiate()
+	var bala = bala_instancia.instantiate()
 	get_tree().current_scene.add_child(bala)
+	bala.daño = daño_disparo
 	bala.global_position = marker_2d.global_position

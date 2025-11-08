@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjjqkvcj6wrdg"]
+[gd_scene load_steps=8 format=3 uid="uid://cjjqkvcj6wrdg"]
 
 [ext_resource type="Texture2D" uid="uid://dcj038638pk8o" path="res://Assets/board.png" id="1_6a2de"]
 [ext_resource type="Script" uid="uid://t8uni6slr2a5" path="res://Framework/nivel_1.gd" id="1_gk7vf"]
+[ext_resource type="PackedScene" uid="uid://cw4iv8fefbb1c" path="res://Framework/Clases/Avatars/Tipos/escudero.tscn" id="2_ystut"]
 [ext_resource type="PackedScene" uid="uid://bnekbr1xujlq" path="res://Framework/UI/HUD.tscn" id="3_g8i1u"]
 [ext_resource type="PackedScene" uid="uid://bs08bsvrgt6ck" path="res://Framework/Objetos/moneda.tscn" id="5_gk7vf"]
 [ext_resource type="PackedScene" uid="uid://dpjievlg88054" path="res://Framework/Clases/cursor_rook.tscn" id="5_y67lp"]
@@ -9,6 +10,7 @@
 
 [node name="Nivel_1" type="Node2D"]
 script = ExtResource("1_gk7vf")
+escudero = ExtResource("2_ystut")
 enemigos_por_oleada = Array[int]([2, 4, 5, 7])
 tiempo_oleadas = Array[float]([3.0, 10.0, 10.0, 10.0])
 
@@ -35,20 +37,25 @@ position = Vector2(673, 239)
 
 [node name="Lineas" type="Node2D" parent="."]
 
-[node name="Marker2D" type="Marker2D" parent="Lineas"]
+[node name="Marker0" type="Marker2D" parent="Lineas"]
 position = Vector2(179, 1026)
 
-[node name="Marker2D2" type="Marker2D" parent="Lineas"]
+[node name="Marker1" type="Marker2D" parent="Lineas"]
 position = Vector2(283, 1026)
 
-[node name="Marker2D3" type="Marker2D" parent="Lineas"]
+[node name="Marker2" type="Marker2D" parent="Lineas"]
 position = Vector2(380, 1026)
 
-[node name="Marker2D4" type="Marker2D" parent="Lineas"]
+[node name="Marker3" type="Marker2D" parent="Lineas"]
 position = Vector2(470, 1026)
 
-[node name="Marker2D5" type="Marker2D" parent="Lineas"]
+[node name="Marker4" type="Marker2D" parent="Lineas"]
 position = Vector2(574, 1026)
 
 [node name="Avatar" parent="." instance=ExtResource("6_y67lp")]
 position = Vector2(185, 929)
+
+[node name="TimerAvatarEscudero" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+ignore_time_scale = true

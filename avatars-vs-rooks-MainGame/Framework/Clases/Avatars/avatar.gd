@@ -13,7 +13,7 @@ var salud_actual : float = 100.0
 
 # Ataque
 @export var ataque : float = 20
-@export var tiempo_de_ataque : float = 2.0
+@export var tiempo_de_ataque : float = 1.3
 @export var velocidad : float = 25.0
 
 
@@ -22,6 +22,7 @@ var rook_a_atacar : Rook_Base
 @onready var animacion: AnimationPlayer = $AnimationPlayer
 @onready var atacar_rook_timer: Timer = $AtacarRookTimer
 @onready var animacion_impacto: AnimationPlayer = $AnimacionImpacto
+
 
 
 func _physics_process(delta: float) -> void:
@@ -50,7 +51,7 @@ func _ready() -> void:
 func _on_detector_area_entered(area: Area2D) -> void:
 	estado_actual = ATACAR
 	rook_a_atacar = area.get_parent()
-	atacar_rook_timer.start()
+	await get_tree().create_timer(1.3).timeout
 	atacar_rook()
 
 func _on_detector_area_exited(area: Area2D) -> void:
@@ -59,10 +60,11 @@ func _on_detector_area_exited(area: Area2D) -> void:
 	atacar_rook_timer.stop()
 	
 func atacar_rook():
-	if rook_a_atacar != null:
+	if rook_a_atacar != null: # Verifica que aún exista
 		rook_a_atacar.recibir_ataque(ataque)
 		atacar_rook_timer.start()
-		
+			
+
 func recibir_ataque(cantidad: float):
 	salud_actual -= cantidad
 	
