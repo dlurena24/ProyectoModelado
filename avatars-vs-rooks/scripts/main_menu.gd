@@ -1,18 +1,23 @@
 extends Control
 
-@onready var play_button: Button = $VBoxContainer/PlayButton
-@onready var settings_button: Button = $VBoxContainer/SettingsButton
-@onready var quit_button: Button = $VBoxContainer/QuitButton
+const BACKGROUND_PATH := "res://assets/fondo .png" 
+
+@onready var play_button: Button = $Control/PlayButton
+@onready var settings_button: Button = $Control2/SettingsButton
+@onready var quit_button: Button = $Control5/QuitButton
 
 @onready var vbox: VBoxContainer = $VBoxContainer
-@onready var hof_button: Button = _ensure_hof_button()  # crea o toma el botón de Salón de la Fama
-@onready var tutorial_button: Button = $VBoxContainer/TutorialButton  # ← tu botón ya existe en la escena
+@onready var hof_button: Button = $Control3/HallOfFameButton  # crea o toma el botón de Salón de la Fama
+@onready var tutorial_button: Button = $Control4/TutorialButton  
 
 @onready var header: HBoxContainer = $Header
 @onready var avatar_tex: TextureRect = _resolve_avatar()
 @onready var username_label: Label = $Header/VBoxContainer/UsernameLabel
 @onready var full_name_label: Label = $Header/VBoxContainer/FullNameLabel
 @onready var name_box: VBoxContainer = $Header/VBoxContainer
+
+# Fondo
+@onready var background_tex: TextureRect = _ensure_background()
 
 const AVATAR_SIZE := Vector2(86, 86)
 const HEADER_HEIGHT := 86
@@ -34,6 +39,17 @@ func _ready() -> void:
 	_setup_header_bounds()
 	_setup_avatar_bounds()
 	_setup_name_box_flags()
+
+	# Cargar imagen de fondo si existe el recurso
+	if ResourceLoader.exists(BACKGROUND_PATH):
+		var tex: Texture2D = load(BACKGROUND_PATH) as Texture2D
+		if tex:
+			background_tex.texture = tex
+
+	# Si tienes un ColorRect tapando el fondo, lo ocultamos (opcional)
+	var cr: ColorRect = get_node_or_null("ColorRect") as ColorRect
+	if cr:
+		cr.visible = false   # o usa cr.modulate.a = 0.25 para tinte semitransparente
 
 	GlobalSettings.user_profile_changed.connect(_apply_profile_ui)
 	if GlobalSettings.user_profile.is_empty() and GlobalSettings.current_user_uid != "":
@@ -62,6 +78,31 @@ func _ensure_hof_button() -> Button:
 	if typeof(idx_quit) == TYPE_INT and int(idx_quit) >= 0:
 		vbox.move_child(b, int(idx_quit))
 	return b
+
+func _ensure_background() -> TextureRect:
+	# Crea (o usa) un TextureRect llamado "Background" como PRIMER hijo para que quede al fondo
+	var bg: TextureRect = get_node_or_null("Background") as TextureRect
+	if bg == null:
+		bg = TextureRect.new()
+		bg.name = "Background"
+		add_child(bg)
+		move_child(bg, 0)  # índice 0 = dibujado primero (detrás)
+	# Anclas a pantalla completa
+	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+	bg.offset_left = 0
+	bg.offset_top = 0
+	bg.offset_right = 0
+	bg.offset_bottom = 0
+	# No intercepta clics
+	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	# Ajuste de imagen al tamaño de ventana
+	bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	# Si prefieres que no recorte y deje bandas negras:
+	# bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	bg.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	bg.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	bg.z_index = -100
+	return bg
 
 func _setup_header_bounds() -> void:
 	header.set_anchors_preset(Control.PRESET_TOP_WIDE)

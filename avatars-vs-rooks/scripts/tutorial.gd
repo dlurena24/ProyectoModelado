@@ -8,7 +8,7 @@ const RETURN_SCENE  := "res://scenes/game.tscn"
 const MENU_SCENE := "res://scenes/main_menu.tscn"
 
 # Si prefieres definir manualmente el orden, llena este array y deja la carpeta vacía.
-var slide_paths: Array[String] = []  # ej: ["res://assets/tutorial/01_intro.png", "res://assets/tutorial/02_controles.png"]
+var slide_paths: Array[String] = ["res://assets/tutorial/slide 1.png", "res://assets/tutorial/slide 2.png", "res://assets/tutorial/slide 3.png"]  # ej: ["res://assets/tutorial/01_intro.png", "res://assets/tutorial/02_controles.png"]
 
 var slides: Array[Texture2D] = []
 var index: int = 0
@@ -24,9 +24,27 @@ var index: int = 0
 func _ready() -> void:
 	title_label.text = "Tutorial"
 	_connect_ui()
+	_fit_setup()
 	_load_slides()
 	_update_ui()
 	GlobalSettings.update_theme()
+
+func _fit_setup() -> void:
+	# Asegura que todo el stack permita expandirse
+	var frame: PanelContainer = $Margin/VBox/SlideFrame
+	var box: Control = $Margin/VBox/SlideFrame/SlideBox
+
+	frame.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	frame.size_flags_vertical = Control.SIZE_EXPAND_FILL
+
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	box.size_flags_vertical = Control.SIZE_EXPAND_FILL
+
+	# El TextureRect se ajusta al espacio y mantiene aspecto (sin recortar)
+	img.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	img.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	img.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	img.custom_minimum_size = Vector2.ZERO  # por si alguna textura establece mínimo
 
 func _connect_ui() -> void:
 	prev_btn.pressed.connect(_on_prev)

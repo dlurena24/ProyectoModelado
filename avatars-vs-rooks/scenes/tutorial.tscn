@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://byg8j2x8cjvyy" path="res://scripts/tutorial.gd" id="1_c13y7"]
 
 [node name="Tutorial" type="Control"]
+clip_contents = true
+layout_direction = 4
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,9 +14,10 @@ grow_vertical = 2
 script = ExtResource("1_c13y7")
 
 [node name="Margin" type="MarginContainer" parent="."]
+clip_contents = true
 layout_mode = 0
-offset_right = 1149.0
-offset_bottom = 638.0
+offset_right = 1200.0
+offset_bottom = 700.0
 
 [node name="VBox" type="VBoxContainer" parent="Margin"]
 layout_mode = 2
@@ -23,17 +26,22 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="SlideFrame" type="PanelContainer" parent="Margin/VBox"]
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="SlideBox" type="CenterContainer" parent="Margin/VBox/SlideFrame"]
+clip_contents = true
+layout_direction = 4
 layout_mode = 2
 
 [node name="SlideTexture" type="TextureRect" parent="Margin/VBox/SlideFrame/SlideBox"]
+clip_contents = true
 layout_mode = 2
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="Footer" type="HBoxContainer" parent="Margin/VBox"]
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 8
 

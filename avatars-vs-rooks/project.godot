@@ -25,6 +25,11 @@ SpotifyApi="*res://scripts/spotify_api.gd"
 AuthUtils="*res://scripts/AuthUtils.gd"
 FirestoreService="*res://scripts/FirestoreService.gd"
 
+[display]
+
+window/size/viewport_width=1200
+window/size/viewport_height=700
+
 [dotnet]
 
 project/assembly_name="Avatars vs Rooks"
