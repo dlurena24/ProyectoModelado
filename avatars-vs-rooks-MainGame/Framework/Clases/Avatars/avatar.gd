@@ -70,6 +70,7 @@ func recibir_ataque(cantidad: float):
 	
 	# Revisa si tiene salud
 	if salud_actual <= 0:
+		Global.agregar_monedas(75)
 		queue_free()
 		return
 	animacion_impacto.play("impacto")

@@ -61,7 +61,7 @@ autostart = true
 ignore_time_scale = true
 
 [node name="TimerMonedas" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 15.0
 autostart = true
 ignore_time_scale = true
 
@@ -87,9 +87,3 @@ position = Vector2(661, 769)
 
 [node name="Marker2D7" type="Marker2D" parent="MarMonedas"]
 position = Vector2(702, 892)
-
-[node name="Marker2D2" type="Marker2D" parent="."]
-position = Vector2(611, 909)
-
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(136, 55)

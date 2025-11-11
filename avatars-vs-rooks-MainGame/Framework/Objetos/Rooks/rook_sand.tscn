@@ -5,7 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cxwj5ruetu70q" path="res://Assets/sandtowerResized.png" id="2_yc6su"]
 
 [node name="Rook_Test1" instance=ExtResource("1_yc6su")]
-"daño_disparo" = 20
+"daño_disparo" = 2
+tiempo_por_disparo = 4.0
 bala_instancia = ExtResource("2_tnxko")
 vida = 3.0
 vida_maxima = 3.0
