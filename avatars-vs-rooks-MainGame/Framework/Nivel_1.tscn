@@ -12,8 +12,6 @@
 script = ExtResource("1_gk7vf")
 escudero = ExtResource("2_ystut")
 moneda = ExtResource("5_gk7vf")
-enemigos_por_oleada = Array[int]([2, 4, 5, 7])
-tiempo_oleadas = Array[float]([3.0, 10.0, 10.0, 10.0])
 
 [node name="Board" type="Sprite2D" parent="."]
 position = Vector2(369.5, 479)
@@ -57,6 +55,12 @@ position = Vector2(574, 1026)
 
 [node name="TimerAvatarEscudero" type="Timer" parent="."]
 wait_time = 5.0
+autostart = true
+ignore_time_scale = true
+
+[node name="TimerNivel" type="Timer" parent="."]
+wait_time = 90.0
+one_shot = true
 autostart = true
 ignore_time_scale = true
 

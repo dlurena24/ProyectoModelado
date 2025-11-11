@@ -1,4 +1,5 @@
-extends Mundo
+class_name Mundo
+extends Node2D
 
 @onready var celdas: Node2D = $Celdas
 @onready var cursor_rook: Node2D = $Cursor_Rook
@@ -6,6 +7,7 @@ extends Mundo
 
 @onready var timer_avatar_escudero: Timer = $TimerAvatarEscudero
 @onready var timer_monedas: Timer = $TimerMonedas
+@onready var timer_nivel: Timer = $TimerNivel
 
 
 # Avatars
@@ -40,8 +42,8 @@ func _ready():
 	crear_celdas()
 	celdas.visible = false
 	
-	#Inicializar clase
-	inicializar_mundo()
+	timer_nivel.start()
+	timer_nivel.timeout.connect(ganar_nivel)
 	
 	timer_avatar_escudero.start()
 	timer_avatar_escudero.timeout.connect(spawnear_escudero)
@@ -76,3 +78,7 @@ func spawnear_moneda():
 	var marker_pos = randi_range(0, 6)
 	var marcador = marcadoresMonedas[marker_pos]
 	moneda_a_colocar.global_position = marcador.global_position
+	
+func ganar_nivel():
+	print("Nivel terminado!")
+	get_tree().change_scene_to_file("res://Framework/GameWon.tscn")
