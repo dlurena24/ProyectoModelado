@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjjqkvcj6wrdg"]
+[gd_scene load_steps=8 format=3 uid="uid://cjjqkvcj6wrdg"]
 
 [ext_resource type="Texture2D" uid="uid://dcj038638pk8o" path="res://Assets/board.png" id="1_6a2de"]
 [ext_resource type="Script" uid="uid://t8uni6slr2a5" path="res://Framework/nivel_1.gd" id="1_gk7vf"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bnekbr1xujlq" path="res://Framework/UI/HUD.tscn" id="3_g8i1u"]
 [ext_resource type="PackedScene" uid="uid://bs08bsvrgt6ck" path="res://Framework/Objetos/moneda.tscn" id="5_gk7vf"]
 [ext_resource type="PackedScene" uid="uid://dpjievlg88054" path="res://Framework/Clases/cursor_rook.tscn" id="5_y67lp"]
+[ext_resource type="Texture2D" uid="uid://d1bc1481ys76t" path="res://Assets/board3.png" id="5_ystut"]
 
 [node name="Nivel_1" type="Node2D"]
 script = ExtResource("1_gk7vf")
@@ -18,6 +19,11 @@ tiempo_oleadas = Array[float]([3.0, 10.0, 10.0, 10.0])
 position = Vector2(369.5, 479)
 scale = Vector2(1.9756757, 1.9833333)
 texture = ExtResource("1_6a2de")
+
+[node name="Board2" type="Sprite2D" parent="."]
+position = Vector2(370.50003, 480)
+scale = Vector2(0.8292411, 0.83854175)
+texture = ExtResource("5_ystut")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -81,3 +87,9 @@ position = Vector2(661, 769)
 
 [node name="Marker2D7" type="Marker2D" parent="MarMonedas"]
 position = Vector2(702, 892)
+
+[node name="Marker2D2" type="Marker2D" parent="."]
+position = Vector2(611, 909)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(136, 55)
