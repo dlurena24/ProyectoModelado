@@ -74,3 +74,10 @@ func recibir_ataque(cantidad: float):
 		queue_free()
 		return
 	animacion_impacto.play("impacto")
+
+func _on_end_line_detector_area_entered(area: Area2D) -> void:
+	perder_nivel()
+	
+func perder_nivel():
+	print("Nivel perdido!")
+	get_tree().change_scene_to_file("res://Framework/GameLost.tscn")
