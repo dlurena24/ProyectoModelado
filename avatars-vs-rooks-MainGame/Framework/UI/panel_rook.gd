@@ -16,4 +16,7 @@ func _ready():
 	
 func _on_gui_input(event:InputEvent):
 	if Input.is_action_just_pressed("click_izquierdo"):
-		GameManager.rook_seleccionado(self)
+		if Global.monedas >= precio_monedas:
+			GameManager.rook_seleccionado(self)
+		else: 
+			print("Monedas insuficientes :P")

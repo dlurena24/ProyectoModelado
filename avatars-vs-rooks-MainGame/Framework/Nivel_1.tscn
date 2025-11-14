@@ -1,26 +1,106 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjjqkvcj6wrdg"]
+[gd_scene load_steps=10 format=3 uid="uid://cjjqkvcj6wrdg"]
 
 [ext_resource type="Texture2D" uid="uid://dcj038638pk8o" path="res://Assets/board.png" id="1_6a2de"]
 [ext_resource type="Script" uid="uid://t8uni6slr2a5" path="res://Framework/nivel_1.gd" id="1_gk7vf"]
+[ext_resource type="PackedScene" uid="uid://cw4iv8fefbb1c" path="res://Framework/Clases/Avatars/Tipos/escudero.tscn" id="2_ystut"]
 [ext_resource type="PackedScene" uid="uid://bnekbr1xujlq" path="res://Framework/UI/HUD.tscn" id="3_g8i1u"]
+[ext_resource type="PackedScene" uid="uid://bs08bsvrgt6ck" path="res://Framework/Objetos/moneda.tscn" id="5_gk7vf"]
 [ext_resource type="PackedScene" uid="uid://dpjievlg88054" path="res://Framework/Clases/cursor_rook.tscn" id="5_y67lp"]
+[ext_resource type="Texture2D" uid="uid://d1bc1481ys76t" path="res://Assets/board3.png" id="5_ystut"]
+[ext_resource type="Script" uid="uid://b32s3qdpcyf8y" path="res://Framework/ending_line.gd" id="8_rcge1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o55rm"]
+size = Vector2(526, 20)
 
 [node name="Nivel_1" type="Node2D"]
 script = ExtResource("1_gk7vf")
+escudero = ExtResource("2_ystut")
+moneda = ExtResource("5_gk7vf")
 
 [node name="Board" type="Sprite2D" parent="."]
-position = Vector2(370, 480)
-scale = Vector2(2, 2)
+position = Vector2(369.5, 479)
+scale = Vector2(1.9756757, 1.9833333)
 texture = ExtResource("1_6a2de")
+
+[node name="Board2" type="Sprite2D" parent="."]
+position = Vector2(370.50003, 480)
+scale = Vector2(0.8292411, 0.83854175)
+texture = ExtResource("5_ystut")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("3_g8i1u")]
 
 [node name="Cursor_Rook" parent="." instance=ExtResource("5_y67lp")]
+z_index = 10
 
 [node name="Celdas" type="Node2D" parent="."]
 position = Vector2(134, 52)
 
 [node name="Rooks" type="Node2D" parent="."]
 position = Vector2(134, 52)
+
+[node name="Lineas" type="Node2D" parent="."]
+
+[node name="Marker0" type="Marker2D" parent="Lineas"]
+position = Vector2(179, 1026)
+
+[node name="Marker1" type="Marker2D" parent="Lineas"]
+position = Vector2(283, 1026)
+
+[node name="Marker2" type="Marker2D" parent="Lineas"]
+position = Vector2(380, 1026)
+
+[node name="Marker3" type="Marker2D" parent="Lineas"]
+position = Vector2(470, 1026)
+
+[node name="Marker4" type="Marker2D" parent="Lineas"]
+position = Vector2(574, 1026)
+
+[node name="TimerAvatarEscudero" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+ignore_time_scale = true
+
+[node name="TimerNivel" type="Timer" parent="."]
+wait_time = 300.0
+one_shot = true
+autostart = true
+ignore_time_scale = true
+
+[node name="TimerMonedas" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+ignore_time_scale = true
+
+[node name="MarMonedas" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="MarMonedas"]
+position = Vector2(691, 130)
+
+[node name="Marker2D2" type="Marker2D" parent="MarMonedas"]
+position = Vector2(648, 266)
+
+[node name="Marker2D3" type="Marker2D" parent="MarMonedas"]
+position = Vector2(702, 359)
+
+[node name="Marker2D4" type="Marker2D" parent="MarMonedas"]
+position = Vector2(648, 489)
+
+[node name="Marker2D5" type="Marker2D" parent="MarMonedas"]
+position = Vector2(704, 639)
+
+[node name="Marker2D6" type="Marker2D" parent="MarMonedas"]
+position = Vector2(661, 769)
+
+[node name="Marker2D7" type="Marker2D" parent="MarMonedas"]
+position = Vector2(702, 892)
+
+[node name="EndingLine" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("8_rcge1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndingLine"]
+position = Vector2(366, 38)
+shape = SubResource("RectangleShape2D_o55rm")
