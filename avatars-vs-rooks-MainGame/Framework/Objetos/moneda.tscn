@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://bs08bsvrgt6ck"]
+
+[ext_resource type="Script" uid="uid://bbyoxirb86l34" path="res://Framework/Objetos/Moneda.gd" id="1_ilc4a"]
+[ext_resource type="Texture2D" uid="uid://c2rhktif4h2lp" path="res://Assets/Coins.png" id="2_6cryo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6hop"]
+atlas = ExtResource("2_6cryo")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stsek"]
+atlas = ExtResource("2_6cryo")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gggyi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6hop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stsek")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1eo60"]
+radius = 36.013885
+
+[node name="Moneda" type="Area2D"]
+script = ExtResource("1_ilc4a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gggyi")
+frame_progress = 0.25433707
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1eo60")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://mp1dcctlcq6a"]
+
+[ext_resource type="PackedScene" uid="uid://braqukx2xq1o1" path="res://Framework/Clases/Rook_Test.tscn" id="1_yc6su"]
+[ext_resource type="PackedScene" uid="uid://bopmguxsje50r" path="res://Framework/Objetos/Balas/sand_ball.tscn" id="2_tnxko"]
+[ext_resource type="Texture2D" uid="uid://cxwj5ruetu70q" path="res://Assets/sandtowerResized.png" id="2_yc6su"]
+
+[node name="Rook_Test1" instance=ExtResource("1_yc6su")]
+"daño_disparo" = 2
+tiempo_por_disparo = 4.0
+bala_instancia = ExtResource("2_tnxko")
+vida = 3.0
+vida_maxima = 3.0
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_yc6su")

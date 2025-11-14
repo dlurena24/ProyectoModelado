@@ -1,6 +1,6 @@
 extends Node2D
 
-var nivel_actual : Nivel
+var nivel_actual : Mundo
 var cursor_rook : Cursor_Rook
 var celda_valida : bool = false
 var mostrar_cursor_rook : bool = false
@@ -18,19 +18,19 @@ func rook_seleccionado(panel_rook: PanelRook) :
 	panel_rook_actual = panel_rook
 	
 	if mostrar_cursor_rook == false:
-		print("Mostrar cursor")
+		#print("Mostrar cursor")
 		mostrar_cursor_rook = true
 		cursor_rook.actualizar_visuales(panel_rook)
 		nivel_actual.mostrar_celdas(true)
 	
 func actualizar_celda_actual(pos : Vector2i, celda : Celda_Rook) :
-	print("AJAA")
-	cursor_rook.establecer_celda_valida(rooks_colocados.has(pos))
+	#print("AJAA")
+	cursor_rook.establecer_celda_valida(!rooks_colocados.has(pos))
 	posicion_actual = pos
 	celda_actual = celda
 	
 func intentar_colocar_rook() :
-	if panel_rook_actual:
+	if panel_rook_actual and not rooks_colocados.has(posicion_actual):
 		# Crear una instancia de Rook a colocar
 		var nuevo_rook = panel_rook_actual.rook_a_colocar.instantiate()
 		# Agregar Rook al nodo del mundo
@@ -41,7 +41,7 @@ func intentar_colocar_rook() :
 		rooks_colocados[posicion_actual] = nuevo_rook
 		
 		# Quitar monedas
-		#Global.quitar_monedas(panel_rook_actual.precio_monedas)
+		Global.quitar_monedas(panel_rook_actual.precio_monedas)
 		
 		# Restablecer variables
 		panel_rook_actual = null
