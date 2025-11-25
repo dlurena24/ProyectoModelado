@@ -12,7 +12,7 @@ const int ledPinG = 13;
 const int ledPinR = 12;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(pinSW, INPUT_PULLUP);
   pinMode(btnA, INPUT_PULLUP);
   pinMode(btnB, INPUT_PULLUP);
