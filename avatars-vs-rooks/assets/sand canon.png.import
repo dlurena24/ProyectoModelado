@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxwj5ruetu70q"
-path="res://.godot/imported/sandtowerResized.png-695bd7616a6480b2769a2b9d3e2d40f6.ctex"
+uid="uid://dck6dq2xpugxi"
+path="res://.godot/imported/sand canon.png-00bee3d76290c6e0b3eb26b37cdbbc7f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sandtowerResized.png"
-dest_files=["res://.godot/imported/sandtowerResized.png-695bd7616a6480b2769a2b9d3e2d40f6.ctex"]
+source_file="res://assets/sand canon.png"
+dest_files=["res://.godot/imported/sand canon.png-00bee3d76290c6e0b3eb26b37cdbbc7f.ctex"]
 
 [params]
 

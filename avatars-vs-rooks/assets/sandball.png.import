@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6k25tkn3tawp"
-path="res://.godot/imported/map_1.jpg-4a539c799972ea376cc1676b59ef7b62.ctex"
+uid="uid://bxsy4j6bqxpwl"
+path="res://.godot/imported/sandball.png-dd85455af144976dea912cc26aa30111.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/map_1.jpg"
-dest_files=["res://.godot/imported/map_1.jpg-4a539c799972ea376cc1676b59ef7b62.ctex"]
+source_file="res://assets/sandball.png"
+dest_files=["res://.godot/imported/sandball.png-dd85455af144976dea912cc26aa30111.ctex"]
 
 [params]
 

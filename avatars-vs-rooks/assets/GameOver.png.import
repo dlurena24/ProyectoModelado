@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://de3oteqca2a2g"
-path="res://.godot/imported/RookTestResized.png-df974086061a588f32bb35a80f939b68.ctex"
+uid="uid://bgj54hhf5so4q"
+path="res://.godot/imported/GameOver.png-5cef93f1773ddfa46581ef15e7b68cf6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/RookTestResized.png"
-dest_files=["res://.godot/imported/RookTestResized.png-df974086061a588f32bb35a80f939b68.ctex"]
+source_file="res://assets/GameOver.png"
+dest_files=["res://.godot/imported/GameOver.png-5cef93f1773ddfa46581ef15e7b68cf6.ctex"]
 
 [params]
 

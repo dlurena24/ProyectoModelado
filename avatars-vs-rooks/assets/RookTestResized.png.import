@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x2nxdi2rga0b"
-path="res://.godot/imported/RookTest.png-24427a2086a067ca68fdd4c10694c781.ctex"
+uid="uid://de3oteqca2a2g"
+path="res://.godot/imported/RookTestResized.png-7fb84b315c93991cbd56f0165972e73d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/RookTest.png"
-dest_files=["res://.godot/imported/RookTest.png-24427a2086a067ca68fdd4c10694c781.ctex"]
+source_file="res://assets/RookTestResized.png"
+dest_files=["res://.godot/imported/RookTestResized.png-7fb84b315c93991cbd56f0165972e73d.ctex"]
 
 [params]
 

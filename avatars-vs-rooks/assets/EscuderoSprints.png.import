@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2rhktif4h2lp"
-path="res://.godot/imported/Coins.png-737106a48fb7ef44a522c9bb630f9929.ctex"
+uid="uid://jvxrolreu5o"
+path="res://.godot/imported/EscuderoSprints.png-b3b6e147698544645bed48b29055c279.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Coins.png"
-dest_files=["res://.godot/imported/Coins.png-737106a48fb7ef44a522c9bb630f9929.ctex"]
+source_file="res://assets/EscuderoSprints.png"
+dest_files=["res://.godot/imported/EscuderoSprints.png-b3b6e147698544645bed48b29055c279.ctex"]
 
 [params]
 

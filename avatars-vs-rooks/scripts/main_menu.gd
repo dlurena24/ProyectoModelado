@@ -132,7 +132,7 @@ func _setup_name_box_flags() -> void:
 	full_name_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 
 func _on_play_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	get_tree().change_scene_to_file("res://Framework/Nivel_1.tscn")
 
 func _on_settings_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/settings_menu.tscn")

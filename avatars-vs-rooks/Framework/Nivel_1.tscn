@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://cjjqkvcj6wrdg"]
 
-[ext_resource type="Texture2D" uid="uid://dcj038638pk8o" path="res://Assets/board.png" id="1_6a2de"]
+[ext_resource type="Texture2D" uid="uid://dcj038638pk8o" path="res://assets/board.png" id="1_6a2de"]
 [ext_resource type="Script" uid="uid://t8uni6slr2a5" path="res://Framework/nivel_1.gd" id="1_gk7vf"]
 [ext_resource type="PackedScene" uid="uid://cw4iv8fefbb1c" path="res://Framework/Clases/Avatars/Tipos/escudero.tscn" id="2_ystut"]
 [ext_resource type="PackedScene" uid="uid://bnekbr1xujlq" path="res://Framework/UI/HUD.tscn" id="3_g8i1u"]
 [ext_resource type="PackedScene" uid="uid://bs08bsvrgt6ck" path="res://Framework/Objetos/moneda.tscn" id="5_gk7vf"]
 [ext_resource type="PackedScene" uid="uid://dpjievlg88054" path="res://Framework/Clases/cursor_rook.tscn" id="5_y67lp"]
-[ext_resource type="Texture2D" uid="uid://d1bc1481ys76t" path="res://Assets/board3.png" id="5_ystut"]
+[ext_resource type="Texture2D" uid="uid://d1bc1481ys76t" path="res://assets/board3.png" id="5_ystut"]
 [ext_resource type="Script" uid="uid://b32s3qdpcyf8y" path="res://Framework/ending_line.gd" id="8_rcge1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o55rm"]
