@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://j1ko6an8fna7"]
 
 [ext_resource type="Script" uid="uid://3pyc0vlterem" path="res://scripts/main_menu.gd" id="1_l6cm7"]
-[ext_resource type="Texture2D" uid="uid://b3t1b74uj0ylt" path="res://assets/Portada del juego.png" id="2_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://dyd51742x3pi1" path="res://assets/vertical bg.png" id="2_bqqt6"]
 [ext_resource type="Script" uid="uid://brj8g6rapyi73" path="res://scripts/BackgroundColorController.gd" id="2_ekxnf"]
 
 [node name="MainMenu" type="Control"]
@@ -15,16 +15,11 @@ script = ExtResource("1_l6cm7")
 
 [node name="Backgrounds" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 837.0
-offset_top = -226.0
-offset_right = 1637.8
-offset_bottom = -223.0
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 1.5707964
 texture = ExtResource("2_bqqt6")
 expand_mode = 3
 stretch_mode = 6
@@ -46,10 +41,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 226.0
-offset_top = 570.0
-offset_right = 275.0
-offset_bottom = 601.0
+offset_left = 224.0
+offset_top = 630.0
+offset_right = 273.0
+offset_bottom = 661.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "Jugar"
@@ -61,10 +56,10 @@ offset_bottom = 68.0
 
 [node name="SettingsButton" type="Button" parent="Control2"]
 layout_mode = 0
-offset_left = 68.0
-offset_top = 176.0
-offset_right = 198.0
-offset_bottom = 207.0
+offset_left = 140.0
+offset_top = 324.0
+offset_right = 270.0
+offset_bottom = 355.0
 text = "Configuración"
 
 [node name="Control3" type="Control" parent="."]
@@ -74,10 +69,10 @@ offset_bottom = 59.0
 
 [node name="HallOfFameButton" type="Button" parent="Control3"]
 layout_mode = 0
-offset_left = 505.0
-offset_top = 162.0
-offset_right = 659.0
-offset_bottom = 193.0
+offset_left = 474.0
+offset_top = 316.0
+offset_right = 628.0
+offset_bottom = 347.0
 text = "Salón de la Fama"
 
 [node name="Control4" type="Control" parent="."]
@@ -87,10 +82,10 @@ offset_bottom = 81.0
 
 [node name="TutorialButton" type="Button" parent="Control4"]
 layout_mode = 0
-offset_left = 102.0
-offset_top = 488.0
-offset_right = 202.0
-offset_bottom = 519.0
+offset_left = 139.0
+offset_top = 595.0
+offset_right = 239.0
+offset_bottom = 626.0
 text = "Tutorial"
 
 [node name="Control5" type="Control" parent="."]
@@ -101,13 +96,14 @@ offset_bottom = 8.0
 
 [node name="QuitButton" type="Button" parent="Control5"]
 layout_mode = 0
-offset_left = 535.0
-offset_top = 494.0
-offset_right = 637.0
-offset_bottom = 525.0
+offset_left = 502.0
+offset_top = 599.0
+offset_right = 604.0
+offset_bottom = 630.0
 text = "Salir"
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 370.0
 offset_top = 232.0
@@ -120,10 +116,9 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.30981067
 anchor_bottom = 0.24539877
-offset_left = 355.0
-offset_top = 217.0
-offset_right = 395.00003
-offset_bottom = 257.0
+offset_top = -9.0
+offset_right = -144.25989
+offset_bottom = -165.58282
 grow_horizontal = 2
 grow_vertical = 2
 

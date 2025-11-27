@@ -52,7 +52,7 @@ func _on_user_signed_in(user_data: Dictionary) -> void:
 	var users = Firebase.Firestore.collection("users")
 	var existing: FirestoreDocument = await users.get_doc(uid)
 	if existing == null:
-		var base_username: String = str(user_data.get("displayName", "Usuario"))
+		var base_username: String = str(user_data.get("displayname", ""))
 		if base_username.is_empty():
 			var email_fb: String = str(user_data.get("email", email_input.text))
 			base_username = email_fb.split("@")[0] if "@" in email_fb else "Usuario"
