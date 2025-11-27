@@ -1,12 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnekbr1xujlq"]
+[gd_scene load_steps=11 format=3 uid="uid://bnekbr1xujlq"]
 
 [ext_resource type="PackedScene" uid="uid://dv0gdna6uij50" path="res://Framework/UI/panel_rook.tscn" id="1_l2hkw"]
 [ext_resource type="Script" uid="uid://bcq2ki0c4ygp5" path="res://Framework/UI/Hud.gd" id="1_x2qqx"]
-[ext_resource type="Texture2D" uid="uid://de3oteqca2a2g" path="res://Assets/RookTestResized.png" id="2_vsbvt"]
 [ext_resource type="PackedScene" uid="uid://mp1dcctlcq6a" path="res://Framework/Objetos/Rooks/rook_sand.tscn" id="3_py7yy"]
 [ext_resource type="PackedScene" uid="uid://do0jscpf10wre" path="res://Framework/Objetos/Rooks/rook_test_1.tscn" id="3_vsbvt"]
-[ext_resource type="Texture2D" uid="uid://cxwj5ruetu70q" path="res://Assets/sandtowerResized.png" id="3_x2qqx"]
-[ext_resource type="Texture2D" uid="uid://c2rhktif4h2lp" path="res://Assets/Coins.png" id="7_3p0xa"]
+[ext_resource type="Texture2D" uid="uid://d4fmdrdfo50vv" path="res://assets/SandRook.png" id="3_x2qqx"]
+[ext_resource type="Texture2D" uid="uid://b4fxyytw12kkt" path="res://assets/RockRook.png" id="5_3p0xa"]
+[ext_resource type="Texture2D" uid="uid://c2rhktif4h2lp" path="res://assets/Coins.png" id="7_3p0xa"]
+[ext_resource type="Texture2D" uid="uid://wofsmlc5vxog" path="res://assets/FireRook.png" id="7_u5w3p"]
+[ext_resource type="Texture2D" uid="uid://c43n7fa3og2to" path="res://assets/WaterRook.png" id="8_3alwg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u5w3p"]
 atlas = ExtResource("7_3p0xa")
@@ -29,7 +31,7 @@ anchors_preset = 9
 anchor_bottom = 1.0
 offset_top = 53.0
 offset_right = 127.0
-offset_bottom = -60.0
+offset_bottom = -384.0
 grow_vertical = 2
 mouse_filter = 2
 
@@ -49,7 +51,20 @@ rook_a_colocar = ExtResource("3_py7yy")
 
 [node name="PanelRook2" parent="Panel/VBoxContainer" instance=ExtResource("1_l2hkw")]
 layout_mode = 2
-textura = ExtResource("2_vsbvt")
+textura = ExtResource("5_3p0xa")
+precio_monedas = 100
+rook_a_colocar = ExtResource("3_vsbvt")
+
+[node name="PanelRook3" parent="Panel/VBoxContainer" instance=ExtResource("1_l2hkw")]
+layout_mode = 2
+textura = ExtResource("7_u5w3p")
+precio_monedas = 150
+rook_a_colocar = ExtResource("3_vsbvt")
+
+[node name="PanelRook4" parent="Panel/VBoxContainer" instance=ExtResource("1_l2hkw")]
+layout_mode = 2
+textura = ExtResource("8_3alwg")
+precio_monedas = 150
 rook_a_colocar = ExtResource("3_vsbvt")
 
 [node name="PanelMonedas" type="Panel" parent="."]

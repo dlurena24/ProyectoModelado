@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://braqukx2xq1o1" path="res://Framework/Clases/Rook_Test.tscn" id="1_yc6su"]
 [ext_resource type="PackedScene" uid="uid://bopmguxsje50r" path="res://Framework/Objetos/Balas/sand_ball.tscn" id="2_tnxko"]
-[ext_resource type="Texture2D" uid="uid://cxwj5ruetu70q" path="res://Assets/sandtowerResized.png" id="2_yc6su"]
+[ext_resource type="Texture2D" uid="uid://d4fmdrdfo50vv" path="res://assets/SandRook.png" id="3_tnxko"]
 
 [node name="Rook_Test1" instance=ExtResource("1_yc6su")]
 "daño_disparo" = 2
@@ -12,4 +12,4 @@ vida = 3.0
 vida_maxima = 3.0
 
 [node name="Sprite2D" parent="." index="2"]
-texture = ExtResource("2_yc6su")
+texture = ExtResource("3_tnxko")
