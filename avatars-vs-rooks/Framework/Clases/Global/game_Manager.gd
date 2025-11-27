@@ -10,7 +10,7 @@ var panel_rook_actual : PanelRook
 var posicion_actual : Vector2i
 var celda_actual : Celda_Rook
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	if cursor_rook != null and mostrar_cursor_rook:
 		cursor_rook.global_position = get_global_mouse_position()
 

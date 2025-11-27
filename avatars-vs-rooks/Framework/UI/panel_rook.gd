@@ -14,7 +14,7 @@ func _ready():
 	$Timer.wait_time = tiempo_de_recuperacion
 	$Timer.one_shot = true
 	
-func _on_gui_input(event:InputEvent):
+func _on_gui_input(_event:InputEvent):
 	if Input.is_action_just_pressed("click_izquierdo"):
 		if Global.monedas >= precio_monedas:
 			GameManager.rook_seleccionado(self)

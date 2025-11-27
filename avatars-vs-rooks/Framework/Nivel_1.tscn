@@ -30,6 +30,7 @@ texture = ExtResource("5_ystut")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("3_g8i1u")]
+clip_contents = true
 
 [node name="Cursor_Rook" parent="." instance=ExtResource("5_y67lp")]
 z_index = 10

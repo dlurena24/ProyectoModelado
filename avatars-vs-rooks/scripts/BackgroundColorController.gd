@@ -1,11 +1,9 @@
 extends ColorRect
 
 func _ready() -> void:
-	anchor_left = 0.0; anchor_top = 0.0; anchor_right = 1.0; anchor_bottom = 1.0
-	offset_left = 0.0; offset_top = 0.0; offset_right = 0.0; offset_bottom = 0.0
-	_resize_to_window()
-	get_window().size_changed.connect(_on_window_resized)
-	set_process(true)
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	z_index = -10000
 
 func _process(_delta: float) -> void:
 	color = GlobalSettings.background_color
