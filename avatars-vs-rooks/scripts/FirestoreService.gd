@@ -154,7 +154,8 @@ func submit_run(uid: String, username: String, time_ms: int) -> bool:
 		"time_ms": int(time_ms),
 		"created_at": int(Time.get_unix_time_from_system())
 	}
-	var url: String = "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/runs?documentId=%s" % [PROJECT_ID, doc_id]
+	var url: String = "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/runs?documentId=%s" \
+		% [PROJECT_ID, doc_id]
 	var body: Dictionary = {"fields": _fs_dict(data)}
 	var res: Dictionary = await _http_json(HTTPClient.METHOD_POST, url, body)
 	return bool(res["ok"])

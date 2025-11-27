@@ -3,6 +3,7 @@ extends Control
 const BACKGROUND_PATH := "res://assets/fondo .png" 
 
 @onready var play_button: Button = $Control/PlayButton
+@onready var continue_button: Button = $Control6/ContinueButton
 @onready var settings_button: Button = $Control2/SettingsButton
 @onready var quit_button: Button = $Control5/QuitButton
 
@@ -27,7 +28,9 @@ func _ready() -> void:
 	play_button.pressed.connect(_on_play_button_pressed)
 	settings_button.pressed.connect(_on_settings_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
-
+	
+	continue_button.pressed.connect(_on_continue_button_pressed)
+	_update_continue_button()
 	# Salón de la Fama
 	if not hof_button.pressed.is_connected(_on_hof_button_pressed):
 		hof_button.pressed.connect(_on_hof_button_pressed)
@@ -183,6 +186,7 @@ func _apply_profile_ui(p: Dictionary) -> void:
 	_setup_header_bounds()
 	_setup_avatar_bounds()
 	_setup_name_box_flags()
+	_update_continue_button()
 
 func _http_into_texture(url: String) -> void:
 	if avatar_tex == null:
@@ -213,3 +217,16 @@ func _load_from_storage(path: String) -> bool:
 		return false
 	await _http_into_texture(url)
 	return avatar_tex.texture != null
+	
+func _update_continue_button() -> void:
+	#Se requiere login:
+	if GlobalSettings.current_user_uid == "":
+		continue_button.visible = false
+		return
+
+	var has_save := SaveManager.has_save_for_current_user()
+	continue_button.visible = has_save
+	continue_button.disabled = not has_save
+
+func _on_continue_button_pressed() -> void:
+	await SaveManager.load_saved_game_for_current_user()

@@ -26,13 +26,14 @@ AuthUtils="*res://scripts/AuthUtils.gd"
 FirestoreService="*res://scripts/FirestoreService.gd"
 GameManager="*res://Framework/Clases/Global/game_Manager.gd"
 Global="*res://Framework/Clases/Global/global.gd"
+SaveManager="*res://scripts/SaveManager.gd"
 
 [display]
 
 window/size/viewport_width=740
 window/size/viewport_height=960
 window/size/window_width_override=740
-window/size/window_height_override=760
+window/size/window_height_override=740
 window/stretch/mode="canvas_items"
 
 [dotnet]
