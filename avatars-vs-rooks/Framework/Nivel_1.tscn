@@ -105,18 +105,3 @@ script = ExtResource("8_rcge1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EndingLine"]
 position = Vector2(366, 38)
 shape = SubResource("RectangleShape2D_o55rm")
-
-[node name="Moneda" parent="." instance=ExtResource("5_gk7vf")]
-position = Vector2(520, 322)
-
-[node name="Moneda2" parent="." instance=ExtResource("5_gk7vf")]
-position = Vector2(516, 509)
-
-[node name="Moneda3" parent="." instance=ExtResource("5_gk7vf")]
-position = Vector2(370, 452)
-
-[node name="Moneda4" parent="." instance=ExtResource("5_gk7vf")]
-position = Vector2(431, 672)
-
-[node name="Moneda5" parent="." instance=ExtResource("5_gk7vf")]
-position = Vector2(339, 592)

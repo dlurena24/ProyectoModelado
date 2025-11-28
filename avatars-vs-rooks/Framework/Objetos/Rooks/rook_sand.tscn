@@ -13,3 +13,6 @@ vida_maxima = 3.0
 
 [node name="Sprite2D" parent="." index="2"]
 texture = ExtResource("3_tnxko")
+
+[node name="Marker2D" parent="." index="3"]
+position = Vector2(0, -24)
