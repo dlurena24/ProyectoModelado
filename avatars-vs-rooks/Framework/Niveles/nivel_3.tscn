@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7oncbmm3wbs0"]
+
+[ext_resource type="PackedScene" uid="uid://cjjqkvcj6wrdg" path="res://Framework/Mundo.tscn" id="1_kl3o3"]
+
+[node name="Nivel_1" instance=ExtResource("1_kl3o3")]
+porcentaje_aumento = 0.6
+
+[node name="TimerAvatarEscudero" parent="." index="7"]
+wait_time = 4.0

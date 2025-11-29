@@ -18,8 +18,9 @@ extends Node2D
 
 @export var moneda : PackedScene
 
-@export var enemigos_totales : int
+var enemigos_totales : float = 10
 @onready var enemigos_muertos : int = 0
+@export var porcentaje_aumento : float 
 
 @onready var marcadoresAvatars = [
 	$Lineas/Marker0,
@@ -46,7 +47,8 @@ func _ready():
 	# Establecer variables del GameManager
 	GameManager.nivel_actual = self
 	GameManager.cursor_rook = $Cursor_Rook
-	
+	enemigos_totales = enemigos_totales + enemigos_totales * porcentaje_aumento
+	print("Enemigos totales: ", enemigos_totales)
 	# Crear celdas
 	crear_celdas()
 	celdas.visible = false
@@ -144,6 +146,6 @@ func ganar_nivel():
 func sumar_enemigo_muerto():
 	enemigos_muertos = enemigos_muertos + 1
 	print(enemigos_muertos)
-	if enemigos_muertos == enemigos_totales:
+	if enemigos_muertos >= enemigos_totales:
 		ganar_nivel()
 	

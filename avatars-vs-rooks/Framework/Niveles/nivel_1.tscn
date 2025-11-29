@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://t2tty03niheo"]
+
+[ext_resource type="PackedScene" uid="uid://cjjqkvcj6wrdg" path="res://Framework/Mundo.tscn" id="1_1uo5n"]
+
+[node name="Nivel_1" instance=ExtResource("1_1uo5n")]

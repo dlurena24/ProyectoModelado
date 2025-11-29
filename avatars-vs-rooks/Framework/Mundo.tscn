@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://cjjqkvcj6wrdg"]
 
 [ext_resource type="Texture2D" uid="uid://dcj038638pk8o" path="res://assets/board.png" id="1_6a2de"]
-[ext_resource type="Script" uid="uid://t8uni6slr2a5" path="res://Framework/nivel_1.gd" id="1_gk7vf"]
+[ext_resource type="Script" uid="uid://t8uni6slr2a5" path="res://Framework/Mundo.gd" id="1_gk7vf"]
 [ext_resource type="PackedScene" uid="uid://df0l8so70cure" path="res://Framework/Clases/Avatars/Tipos/flechador.tscn" id="2_rcge1"]
 [ext_resource type="PackedScene" uid="uid://cw4iv8fefbb1c" path="res://Framework/Clases/Avatars/Tipos/escudero.tscn" id="2_ystut"]
 [ext_resource type="PackedScene" uid="uid://bnekbr1xujlq" path="res://Framework/UI/HUD.tscn" id="3_g8i1u"]
@@ -22,7 +22,6 @@ flechador = ExtResource("2_rcge1")
 lenador = ExtResource("4_teexb")
 canival = ExtResource("5_ppako")
 moneda = ExtResource("5_gk7vf")
-enemigos_totales = 10
 
 [node name="Board" type="Sprite2D" parent="."]
 position = Vector2(369.5, 479)
@@ -66,7 +65,7 @@ position = Vector2(470, 1026)
 position = Vector2(574, 1026)
 
 [node name="TimerAvatarEscudero" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 10.0
 autostart = true
 ignore_time_scale = true
 
@@ -77,7 +76,7 @@ autostart = true
 ignore_time_scale = true
 
 [node name="TimerMonedas" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 10.0
 autostart = true
 ignore_time_scale = true
 
