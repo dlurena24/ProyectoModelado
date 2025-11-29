@@ -22,6 +22,7 @@ flechador = ExtResource("2_rcge1")
 lenador = ExtResource("4_teexb")
 canival = ExtResource("5_ppako")
 moneda = ExtResource("5_gk7vf")
+enemigos_totales = 10
 
 [node name="Board" type="Sprite2D" parent="."]
 position = Vector2(369.5, 479)

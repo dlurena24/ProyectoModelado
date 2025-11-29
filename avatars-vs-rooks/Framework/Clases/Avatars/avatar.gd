@@ -66,12 +66,14 @@ func atacar_rook():
 			
 
 func recibir_ataque(cantidad: float):
+	var nivel = get_tree().get_current_scene()
 	salud_actual -= cantidad
 	
 	# Revisa si tiene salud
 	if salud_actual <= 0:
 		Global.agregar_monedas(75)
 		queue_free()
+		nivel.sumar_enemigo_muerto()
 		return
 	animacion_impacto.play("impacto")
 

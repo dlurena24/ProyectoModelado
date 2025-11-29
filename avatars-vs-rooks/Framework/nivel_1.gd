@@ -18,6 +18,9 @@ extends Node2D
 
 @export var moneda : PackedScene
 
+@export var enemigos_totales : int
+@onready var enemigos_muertos : int = 0
+
 @onready var marcadoresAvatars = [
 	$Lineas/Marker0,
 	$Lineas/Marker1,
@@ -36,6 +39,9 @@ extends Node2D
 	$MarMonedas/Marker2D7
 ]
 
+var avatars = ["flechador", "escudero", "lenador", "canival"]
+var weights = [40, 30, 20, 10]  
+
 func _ready():
 	# Establecer variables del GameManager
 	GameManager.nivel_actual = self
@@ -46,7 +52,7 @@ func _ready():
 	celdas.visible = false
 	
 	timer_nivel.start()
-	timer_nivel.timeout.connect(ganar_nivel)
+	#timer_nivel.timeout.connect(ganar_nivel)
 	
 	timer_avatar_spawn.start()
 	timer_avatar_spawn.timeout.connect(spawnear_avatar)
@@ -68,8 +74,7 @@ func crear_celdas():
 			nueva_celda.posicion_celda = Vector2i(x,y)
 			
 
-var avatars = ["flechador", "escudero", "lenador", "canival"]
-var weights = [40, 30, 20, 10]  
+# Avatars
 
 func weighted_choice(options: Array, weights: Array):
 	var total := 0
@@ -135,3 +140,10 @@ func spawnear_moneda():
 func ganar_nivel():
 	print("Nivel terminado!")
 	get_tree().change_scene_to_file("res://Framework/GameWon.tscn")
+
+func sumar_enemigo_muerto():
+	enemigos_muertos = enemigos_muertos + 1
+	print(enemigos_muertos)
+	if enemigos_muertos == enemigos_totales:
+		ganar_nivel()
+	
