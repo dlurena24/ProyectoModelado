@@ -68,6 +68,7 @@ func load_saved_game_for_current_user() -> void:
 		push_error("No se pudo abrir guardado: " + path)
 		return
 
+
 	var text := file.get_as_text()
 	file.close()
 
