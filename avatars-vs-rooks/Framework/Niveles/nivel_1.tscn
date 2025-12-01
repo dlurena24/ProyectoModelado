@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://t2tty03niheo"]
+[gd_scene load_steps=3 format=3 uid="uid://t2tty03niheo"]
 
 [ext_resource type="PackedScene" uid="uid://cjjqkvcj6wrdg" path="res://Framework/Mundo.tscn" id="1_1uo5n"]
+[ext_resource type="Texture2D" uid="uid://cjs1nywbu70c1" path="res://assets/lvl1.png" id="2_w1jd8"]
 
 [node name="Nivel_1" instance=ExtResource("1_1uo5n")]
 next_level_scene = "uid://1740vgio2yia"
+
+[node name="Board2" parent="." index="1"]
+texture = ExtResource("2_w1jd8")
+
+[node name="TimerMonedas" parent="." index="9"]
+wait_time = 5.0

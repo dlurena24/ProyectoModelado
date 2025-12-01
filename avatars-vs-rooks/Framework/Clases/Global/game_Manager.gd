@@ -43,9 +43,16 @@ func intentar_colocar_rook() :
 		# Quitar monedas
 		Global.quitar_monedas(panel_rook_actual.precio_monedas)
 		
+		nuevo_rook.celda_ocupada = posicion_actual
+		nuevo_rook.connect("murio", Callable(self, "_on_rook_muerto"))
+		
 		# Restablecer variables
 		panel_rook_actual = null
 		celda_actual = null
 		mostrar_cursor_rook = false
 		nivel_actual.mostrar_celdas(false)
 		cursor_rook.actualizar_visuales(null)
+		
+func _on_rook_muerto(pos: Vector2i):
+	if rooks_colocados.has(pos):
+		rooks_colocados.erase(pos)

@@ -19,7 +19,8 @@ extends Node2D
 @export var lenador : PackedScene
 @export var canival : PackedScene
 
-@export var moneda : PackedScene
+#@export var moneda : PackedScene
+#var moneda : PackedScene
 
 var enemigos_totales : float = 10
 @onready var enemigos_muertos : int = 0
@@ -45,6 +46,8 @@ var enemigos_totales : float = 10
 
 var avatars = ["flechador", "escudero", "lenador", "canival"]
 var weights = [40, 30, 20, 10]  
+
+#var monedas = ["25", "50", "75"]
 
 func _ready():
 	# Establecer variables del GameManager
@@ -144,11 +147,20 @@ func spawnear_avatar():
 			spawnear_canival()
 
 func spawnear_moneda():
+	var monedas = [
+		preload("res://Framework/Objetos/Monedas/25.tscn"),
+		preload("res://Framework/Objetos/Monedas/50.tscn"),
+		preload("res://Framework/Objetos/Monedas/75.tscn")
+	]
+	
+	var moneda = monedas.pick_random()
 	var moneda_a_colocar = moneda.instantiate()
 	get_tree().current_scene.add_child(moneda_a_colocar)
 	var marker_pos = randi_range(0, 6)
 	var marcador = marcadoresMonedas[marker_pos]
 	moneda_a_colocar.global_position = marcador.global_position
+	
+	
 	
 func ganar_nivel():
 	print("Nivel terminado!")
