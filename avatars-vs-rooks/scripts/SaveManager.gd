@@ -1,6 +1,8 @@
 extends Node
 
 const SAVE_DIR := "user://saves"
+var is_loading_save: bool = false
+
 
 func _ready() -> void:
 	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
@@ -58,7 +60,6 @@ func save_game_for_current_user(level: Node) -> bool:
 func load_saved_game_for_current_user() -> void:
 	var uid := _get_current_uid()
 	var path := _get_save_path_for_uid(uid)
-
 	if not FileAccess.file_exists(path):
 		push_warning("SaveManager: no hay partida guardada para %s" % uid)
 		return
@@ -70,7 +71,7 @@ func load_saved_game_for_current_user() -> void:
 	var text := file.get_as_text()
 	file.close()
 
-	var parsed :Variant= JSON.parse_string(text)
+	var parsed: Variant = JSON.parse_string(text)
 	if typeof(parsed) != TYPE_DICTIONARY:
 		push_error("SaveManager: archivo de guardado corrupto.")
 		return
@@ -86,8 +87,11 @@ func load_saved_game_for_current_user() -> void:
 		push_error("SaveManager: no se pudo cargar escena: " + scene_path)
 		return
 
+	is_loading_save = true
+
 	var err := get_tree().change_scene_to_packed(packed)
 	if err != OK:
+		is_loading_save = false
 		push_error("SaveManager: change_scene_to_packed falló con código %d" % err)
 		return
 
@@ -100,10 +104,13 @@ func load_saved_game_for_current_user() -> void:
 			break
 
 	if current_level == null:
+		is_loading_save = false
 		push_error("SaveManager: current_scene sigue null después de cargar.")
 		return
+
 	var r: Dictionary = data.get("run", {})
 	RunManager.restore_from_save(int(r.get("total_elapsed_ms", 0)), int(r.get("current_level_index", 0)))
+
 	# Restaurar datos globales (monedas)
 	var g: Dictionary = data.get("global", {})
 	if g.has("monedas"):
@@ -117,3 +124,4 @@ func load_saved_game_for_current_user() -> void:
 	else:
 		push_warning("SaveManager: la escena cargada no tiene apply_save_data().")
 	RunManager.resume_segment()
+	is_loading_save = false

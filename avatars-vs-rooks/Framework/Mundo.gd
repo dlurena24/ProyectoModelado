@@ -53,6 +53,13 @@ func _ready():
 	# Establecer variables del GameManager
 	GameManager.nivel_actual = self
 	GameManager.cursor_rook = $Cursor_Rook
+	GameManager.reset_for_new_level()
+	
+	if not SaveManager.is_loading_save:
+		Global.monedas = 0
+		Global.monedas_actualizadas.emit(Global.monedas)
+		
+	
 	enemigos_totales = enemigos_totales + enemigos_totales * porcentaje_aumento
 	print("Enemigos totales: ", enemigos_totales)
 	# Crear celdas
@@ -68,7 +75,7 @@ func _ready():
 	timer_monedas.start()
 	timer_monedas.timeout.connect(spawnear_moneda)
 	randomize()
-	
+
 	if level_number == 1 and not RunManager.is_running:
 		RunManager.start_new_run()
 	else:
