@@ -182,3 +182,65 @@ func get_top_runs(limit_count: int = 100) -> Array:
 				"created_at": int(f.get("created_at", {}).get("integerValue", "0"))
 			})
 	return out2
+	
+# ---------- HALL OF FAME (BEST RUNS) ----------
+
+func get_best_run(uid: String) -> Dictionary:
+	var url := "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/best_runs/%s" % [PROJECT_ID, uid]
+	var res: Dictionary = await _http_json(HTTPClient.METHOD_GET, url)
+	if not res["ok"] or res["json"] == null or not (res["json"] is Dictionary):
+		return {}
+	var doc: Dictionary = res["json"]
+	var f: Dictionary = doc.get("fields", {})
+	return {
+		"uid": f.get("uid", {}).get("stringValue", ""),
+		"username": f.get("username", {}).get("stringValue", ""),
+		"time_ms": int(f.get("time_ms", {}).get("integerValue", "0")),
+		"updated_at": int(f.get("updated_at", {}).get("integerValue", "0"))
+	}
+
+func submit_best_run(uid: String, username: String, time_ms: int) -> bool:
+	# Si ya existe un mejor tiempo y el nuevo es peor/igual, no sobrescribimos
+	var prev := await get_best_run(uid)
+	if not prev.is_empty():
+		var prev_ms := int(prev.get("time_ms", 0))
+		if prev_ms > 0 and time_ms >= prev_ms:
+			return true
+
+	var data: Dictionary = {
+		"uid": uid,
+		"username": username,
+		"time_ms": int(time_ms),
+		"updated_at": int(Time.get_unix_time_from_system())
+	}
+
+	var url := "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents/best_runs/%s" % [PROJECT_ID, uid]
+	var body: Dictionary = {"fields": _fs_dict(data)}
+	var res: Dictionary = await _http_json(HTTPClient.METHOD_PATCH, url, body)
+	return bool(res["ok"])
+
+func get_top_best_runs(limit_count: int = 100) -> Array:
+	var url: String = "https://firestore.googleapis.com/v1/projects/%s/databases/(default)/documents:runQuery" % PROJECT_ID
+	var body: Dictionary = {
+		"structuredQuery": {
+			"from": [{"collectionId": "best_runs"}],
+			"orderBy": [{"field": {"fieldPath": "time_ms"}, "direction": "ASCENDING"}],
+			"limit": limit_count
+		}
+	}
+
+	var res: Dictionary = await _http_json(HTTPClient.METHOD_POST, url, body)
+	if not res["ok"] or res["json"] == null or not (res["json"] is Array):
+		return []
+
+	var out2: Array = []
+	for row in (res["json"] as Array):
+		if row is Dictionary and row.has("document"):
+			var f: Dictionary = row["document"]["fields"]
+			out2.append({
+				"uid": f.get("uid", {}).get("stringValue", ""),
+				"username": f.get("username", {}).get("stringValue", ""),
+				"time_ms": int(f.get("time_ms", {}).get("integerValue", "0")),
+				"updated_at": int(f.get("updated_at", {}).get("integerValue", "0"))
+			})
+	return out2

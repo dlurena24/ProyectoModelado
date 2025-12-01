@@ -30,13 +30,19 @@ func _go_back() -> void:
 func _load_runs() -> void:
 	tree.clear()
 	var root := tree.create_item()
+	
+	#var rows: Array = await FirestoreService.get_top_runs(100)
+#
+	#if rows.is_empty():
+		#rows = _fake_rows()
 
-	# Cargar del backend (ordenado por time_ms asc)
-	var rows: Array = await FirestoreService.get_top_runs(100)
+	var rows: Array = await FirestoreService.get_top_best_runs(200)
 
-	# Si aún no hay datos, usar falsos
 	if rows.is_empty():
-		rows = _fake_rows()
+		var it := tree.create_item(root)
+		it.set_text(1, "Aún no hay tiempos registrados.")
+		it.set_text(2, "")
+		return
 
 	var rank := 1
 	for r in rows:
@@ -61,12 +67,12 @@ static func _format_ms(ms: int) -> String:
 	var seconds: int = total_sec % 60
 	var millis: int = ms % 1000
 	return "%02d:%02d.%03d" % [minutes, seconds, millis]
-
-static func _fake_rows() -> Array:
-	return [
-		{"username": "Luna",     "time_ms":  84532},
-		{"username": "Sol",      "time_ms":  92310},
-		{"username": "Orion",    "time_ms": 101225},
-		{"username": "Valkyria", "time_ms": 110877},
-		{"username": "Atlas",    "time_ms": 120004}
-	]
+#
+#static func _fake_rows() -> Array:
+	#return [
+		#{"username": "Luna",     "time_ms":  84532},
+		#{"username": "Sol",      "time_ms":  92310},
+		#{"username": "Orion",    "time_ms": 101225},
+		#{"username": "Valkyria", "time_ms": 110877},
+		#{"username": "Atlas",    "time_ms": 120004}
+	#]

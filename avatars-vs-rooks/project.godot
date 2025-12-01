@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Avatars vs Rooks"
-run/main_scene="uid://b7oncbmm3wbs0"
+run/main_scene="uid://c0yviw3gumrmc"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -26,6 +26,8 @@ AuthUtils="*res://scripts/AuthUtils.gd"
 FirestoreService="*res://scripts/FirestoreService.gd"
 GameManager="*res://Framework/Clases/Global/game_Manager.gd"
 Global="*res://Framework/Clases/Global/global.gd"
+RunManager="*res://scripts/RunManager.gd"
+SaveManager="*res://scripts/SaveManager.gd"
 
 [display]
 

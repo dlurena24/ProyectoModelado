@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://cjjqkvcj6wrdg" path="res://Framework/Mundo.tscn" id="1_0mncc"]
 
 [node name="Nivel_1" instance=ExtResource("1_0mncc")]
+level_number = 2
+next_level_scene = "uid://b7oncbmm3wbs0"
 porcentaje_aumento = 0.3
 
 [node name="TimerAvatarEscudero" parent="." index="7"]

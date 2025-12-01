@@ -56,6 +56,8 @@ func _on_user_signed_in(user_data: Dictionary) -> void:
 		if base_username.is_empty():
 			var email_fb: String = str(user_data.get("email", email_input.text))
 			base_username = email_fb.split("@")[0] if "@" in email_fb else "Usuario"
+		base_username = base_username.strip_edges()
+		base_username = base_username.replace(" ", "_")
 		await users.set_doc(uid, {
 			"username": base_username,
 			"email": user_data.get("email", email_input.text),

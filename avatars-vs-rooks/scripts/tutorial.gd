@@ -3,7 +3,7 @@ extends Control
 # Carpeta de donde se cargarán las imágenes automáticamente si slide_paths está vacío
 const SLIDES_FOLDER := "res://assets/tutorial"
 # A dónde ir al terminar / saltar el tutorial
-const RETURN_SCENE  := "res://Framework/Nivel_1.tscn"
+const RETURN_SCENE  := "res://Framework/Niveles/nivel_1.tscn"
 # A donde ir al terminar la ultima imagen del turioral
 const MENU_SCENE := "res://scenes/main_menu.tscn"
 
