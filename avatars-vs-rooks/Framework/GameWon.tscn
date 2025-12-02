@@ -1,10 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://d20dp1ovin3nb"]
+[gd_scene load_steps=3 format=3 uid="uid://d20dp1ovin3nb"]
 
-[ext_resource type="Texture2D" uid="uid://s278ii6mfmfg" path="res://Assets/GameWon.png" id="1_8vjb3"]
+[ext_resource type="Texture2D" uid="uid://s278ii6mfmfg" path="res://assets/GameWon.png" id="1_8vjb3"]
+[ext_resource type="Script" uid="uid://ce2kphw1bgnx4" path="res://Framework/game_won.gd" id="1_14kfo"]
 
-[node name="Node2D" type="Node2D"]
+[node name="GameWon" type="Node2D"]
+script = ExtResource("1_14kfo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(370.25, 479.5)
 scale = Vector2(1.9986484, 1.9979167)
 texture = ExtResource("1_8vjb3")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
