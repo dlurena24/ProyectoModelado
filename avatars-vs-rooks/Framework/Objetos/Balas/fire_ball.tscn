@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfx7s4mattlg"]
+
+[ext_resource type="PackedScene" uid="uid://ctyejranyml37" path="res://Framework/Objetos/bala.tscn" id="1_75mf1"]
+[ext_resource type="Texture2D" uid="uid://bpngc3jg5bqvw" path="res://assets/fire.png" id="2_1vvvv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ex70k"]
+atlas = ExtResource("2_1vvvv")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvlk2"]
+atlas = ExtResource("2_1vvvv")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dkm7v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ex70k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvlk2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="sand_Ball" instance=ExtResource("1_75mf1")]
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_dkm7v")
+frame_progress = 0.027168484

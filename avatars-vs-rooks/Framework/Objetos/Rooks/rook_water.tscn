@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://w6m7v6lhoq0o"]
+
+[ext_resource type="PackedScene" uid="uid://braqukx2xq1o1" path="res://Framework/Clases/Rook_Test.tscn" id="1_e1obk"]
+[ext_resource type="PackedScene" uid="uid://dpcii1oh6f37" path="res://Framework/Objetos/Balas/water_ball.tscn" id="2_e1obk"]
+[ext_resource type="Texture2D" uid="uid://c43n7fa3og2to" path="res://assets/WaterRook.png" id="3_e1obk"]
+
+[node name="Rook_Test1" instance=ExtResource("1_e1obk")]
+"daño_disparo" = 8
+tiempo_por_disparo = 4.0
+bala_instancia = ExtResource("2_e1obk")
+vida = 16.0
+vida_maxima = 16.0
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("3_e1obk")
+
+[node name="Marker2D" parent="." index="3"]
+position = Vector2(0, -19)

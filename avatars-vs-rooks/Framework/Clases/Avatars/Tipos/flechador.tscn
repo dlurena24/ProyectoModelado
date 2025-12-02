@@ -1,0 +1,104 @@
+[gd_scene load_steps=15 format=3 uid="uid://df0l8so70cure"]
+
+[ext_resource type="PackedScene" uid="uid://da675x64ue5sx" path="res://Framework/Clases/Avatars/avatar.tscn" id="1_3f2cg"]
+[ext_resource type="Texture2D" uid="uid://brgkvfies16u6" path="res://assets/FlechadorWalk.png" id="2_jc0ag"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3f2cg"]
+atlas = ExtResource("2_jc0ag")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fp8rt"]
+atlas = ExtResource("2_jc0ag")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgnl5"]
+atlas = ExtResource("2_jc0ag")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxfja"]
+atlas = ExtResource("2_jc0ag")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukvnw"]
+atlas = ExtResource("2_jc0ag")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj84f"]
+atlas = ExtResource("2_jc0ag")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j32ec"]
+atlas = ExtResource("2_jc0ag")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggnlk"]
+atlas = ExtResource("2_jc0ag")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q1w5l"]
+atlas = ExtResource("2_jc0ag")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vs45u"]
+atlas = ExtResource("2_jc0ag")
+region = Rect2(768, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbhig"]
+atlas = ExtResource("2_jc0ag")
+region = Rect2(864, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sfxej"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3f2cg")
+}],
+"loop": true,
+"name": &"atacar",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fp8rt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgnl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxfja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukvnw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj84f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j32ec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggnlk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q1w5l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vs45u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbhig")
+}],
+"loop": true,
+"name": &"caminar",
+"speed": 10.0
+}]
+
+[node name="Avatar" instance=ExtResource("1_3f2cg")]
+salud_maxima = 5.0
+ataque = 2.0
+tiempo_de_ataque = 10.0
+velocidad = 12.0
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_sfxej")
+frame_progress = 0.9237997

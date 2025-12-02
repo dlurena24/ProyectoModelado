@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsnificum6u40"]
+
+[ext_resource type="Script" uid="uid://b7c018y5a2lg0" path="res://Framework/level_victory.gd" id="1_gyvk2"]
+
+[node name="LevelVictory" type="Node2D"]
+script = ExtResource("1_gyvk2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 740.0
+offset_bottom = 960.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0.78431374, 0, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 740.0
+offset_bottom = 960.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -261.0
+offset_top = -39.5
+offset_right = 261.0
+offset_bottom = 39.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 58
+text = "¡Nivel completado!"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true

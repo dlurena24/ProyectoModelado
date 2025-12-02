@@ -3,6 +3,7 @@ extends Control
 const BACKGROUND_PATH := "res://assets/fondo .png" 
 
 @onready var play_button: Button = $Control/PlayButton
+@onready var continue_button: Button = $Control6/ContinueButton
 @onready var settings_button: Button = $Control2/SettingsButton
 @onready var quit_button: Button = $Control5/QuitButton
 
@@ -27,6 +28,11 @@ func _ready() -> void:
 	play_button.pressed.connect(_on_play_button_pressed)
 	settings_button.pressed.connect(_on_settings_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
+	# Botón Continuar
+	if continue_button:
+		continue_button.disabled = not SaveManager.has_saved_game_for_current_user()
+		continue_button.pressed.connect(_on_continue_button_pressed)
+
 
 	# Salón de la Fama
 	if not hof_button.pressed.is_connected(_on_hof_button_pressed):
@@ -132,7 +138,11 @@ func _setup_name_box_flags() -> void:
 	full_name_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 
 func _on_play_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	RunManager.start_new_run()
+	get_tree().change_scene_to_file("res://Framework/Niveles/nivel_1.tscn")
+	
+func _on_continue_button_pressed() -> void:
+	SaveManager.load_saved_game_for_current_user()
 
 func _on_settings_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/settings_menu.tscn")

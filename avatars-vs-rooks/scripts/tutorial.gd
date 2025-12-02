@@ -3,7 +3,7 @@ extends Control
 # Carpeta de donde se cargarán las imágenes automáticamente si slide_paths está vacío
 const SLIDES_FOLDER := "res://assets/tutorial"
 # A dónde ir al terminar / saltar el tutorial
-const RETURN_SCENE  := "res://scenes/game.tscn"
+const RETURN_SCENE  := "res://Framework/Niveles/nivel_1.tscn"
 # A donde ir al terminar la ultima imagen del turioral
 const MENU_SCENE := "res://scenes/main_menu.tscn"
 
@@ -50,7 +50,7 @@ func _connect_ui() -> void:
 	prev_btn.pressed.connect(_on_prev)
 	next_btn.pressed.connect(_on_next)
 	skip_btn.pressed.connect(_on_finish)
-	play_btn.pressed.connect(_on_finish)
+	play_btn.pressed.connect(_on_jugar)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_left"):
@@ -123,7 +123,8 @@ func _on_next() -> void:
 
 func _on_finish() -> void:
 	get_tree().change_scene_to_file(MENU_SCENE)
-
+func _on_jugar() -> void:
+	get_tree().change_scene_to_file(RETURN_SCENE)
 # ----------------- UI -----------------
 func _update_ui() -> void:
 	# imagen actual
