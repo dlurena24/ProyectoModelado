@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://comgy3q3t26u4"]
+
+[ext_resource type="PackedScene" uid="uid://braqukx2xq1o1" path="res://Framework/Clases/Rook_Test.tscn" id="1_a6g4s"]
+[ext_resource type="PackedScene" uid="uid://2ohw4ak8u834" path="res://Framework/Objetos/Balas/rock_ball.tscn" id="2_a6g4s"]
+[ext_resource type="Texture2D" uid="uid://b4fxyytw12kkt" path="res://assets/RockRook.png" id="3_a6g4s"]
+
+[node name="Rook_Test1" instance=ExtResource("1_a6g4s")]
+"daño_disparo" = 4
+tiempo_por_disparo = 4.0
+bala_instancia = ExtResource("2_a6g4s")
+vida = 14.0
+vida_maxima = 14.0
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("3_a6g4s")
+
+[node name="Marker2D" parent="." index="3"]
+position = Vector2(0, -24)

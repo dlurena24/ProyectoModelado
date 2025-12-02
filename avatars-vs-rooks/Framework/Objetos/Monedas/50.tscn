@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcba5j54mph4o"]
+
+[ext_resource type="PackedScene" uid="uid://bs08bsvrgt6ck" path="res://Framework/Objetos/moneda.tscn" id="1_buo8u"]
+[ext_resource type="Texture2D" uid="uid://djj2rpmeo6qey" path="res://assets/50.png" id="2_buo8u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fiuqh"]
+atlas = ExtResource("2_buo8u")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yk1vy"]
+atlas = ExtResource("2_buo8u")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tjjqy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fiuqh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yk1vy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Moneda" instance=ExtResource("1_buo8u")]
+cantidad = 50
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_tjjqy")
+frame = 1
+frame_progress = 0.7013523
